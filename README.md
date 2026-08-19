@@ -5,8 +5,8 @@
 ## Current Phase
 
 1. Strategy ✅
-2. IA ← NOW
-3. Wireframe
+2. IA ✅
+3. Wireframe ← NOW
 4. Build Spec
 5. Implementation
 6. Content
@@ -42,8 +42,9 @@ AI agent와 작업자는 아래 순서로 읽는다.
 1. `README.md`
 2. `AGENTS.md`
 3. `docs/00_STRATEGY.md`
-4. 현재 작업 단계의 승인 문서
-5. 필요 시 `docs/DECISIONS.md`
+4. `docs/01_IA.md`
+5. 현재 작업 단계의 승인 문서
+6. 필요 시 `docs/DECISIONS.md`
 
 ## Planned Documentation
 
@@ -58,4 +59,4 @@ docs/
 └─ DECISIONS.md
 ```
 
-`01_IA.md`, `02_WIREFRAME.md`, `03_BUILD_SPEC.md`는 각 단계의 논의와 승인이 완료된 뒤 생성한다. 빈 계획 문서를 미리 만들지 않는다.
+`02_WIREFRAME.md`, `03_BUILD_SPEC.md`는 각 단계의 논의와 승인이 완료된 뒤 생성한다. 빈 계획 문서를 미리 만들지 않는다.
