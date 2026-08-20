@@ -79,6 +79,10 @@ Wireframe 정본 도구는 **Figma Starter 무료 플랜 ($0)**으로 사용한�
 
 유료 Figma 플랜은 무료 제약이 실제 작업을 방해할 때만 재검토한다.
 
+### Superseded by
+
+D-012. 실제 사용 중 Figma Starter의 MCP 호출량이 AI 반복 작업에 제약이 되는 것이 확인되어, Figma는 보조 시각 자료로 역할을 변경했다.
+
 ---
 
 ## D-006 — 2026-08-19 — 별도 고충실도 디자인 단계는 기본 공정에서 제외
@@ -185,3 +189,31 @@ Work의 기본 성격을 프로젝트 카드와 성과 중심의 포트폴리오
 ### Reason
 
 개인 웹사이트 전체가 취업용 포트폴리오처럼 보이는 것을 막으면서도, 필요한 방문자에게는 경력과 전문성을 충분히 설명할 수 있어야 한다. Work를 개인적인 경력 이야기로 만들면 Home의 개인 디렉터리 성격, Writing의 기록 성격, Now의 현재성, About의 인간적인 소개와도 자연스럽게 연결된다.
+
+---
+
+## D-012 — 2026-08-20 — Wireframe 반복 검토 기준을 GitHub HTML/CSS prototype으로 전환
+
+### Decision
+
+Wireframe의 반복 제작·수정·responsive 검토 기준을 `design/wireframe/`의 정적 HTML/CSS prototype으로 전환한다.
+
+Figma는 초기 방향 탐색과 시각적 참고/승인 기록을 보존하는 보조 도구로 유지하지만, Figma MCP를 프로젝트 진행의 필수 의존성으로 두지 않는다.
+
+HTML/CSS prototype은 제품 코드가 아니라 구조 검토용 산출물이며, 실제 구현에서는 승인된 Wireframe과 Build Spec을 기준으로 별도 구현한다.
+
+### Reason
+
+실제 작업 중 Figma Starter의 MCP 호출량이 AI agent가 반복적으로 화면을 읽고 수정하는 workflow에 제약이 되는 것이 확인되었다.
+
+프로젝트의 원래 목적은 특정 디자인 도구를 사용하는 것이 아니라 **사용자와 AI agent가 동일한 화면을 보고 합의하고, 작업 환경이 달라져도 승인된 구조를 인계하는 것**이다.
+
+GitHub에 HTML/CSS prototype을 보존하면 다음 장점이 있다.
+
+- 추가 월 구독비 없이 반복 수정 가능
+- Figma MCP 한도와 무관
+- 어느 AI agent든 repo만 읽고 화면 구조를 재현 가능
+- 실제 브라우저 폭에서 responsive 구조 확인 가능
+- 프로젝트 source of truth를 GitHub에 둔다는 D-007과 일치
+
+Figma 유료 플랜은 Figma 자체가 여러 프로젝트의 상시 디자인 작업 도구가 되는 등 별도 필요성이 확인될 때만 재검토한다.
