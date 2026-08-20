@@ -56,12 +56,33 @@
 
 ## Wireframe Rules
 
-- Wireframe 정본 도구는 **Figma Starter (무료 플랜)**다.
+- 반복 검토와 구조 수정의 기준은 `design/wireframe/`의 responsive HTML/CSS prototype이다.
+- Figma는 초기 탐색 과정과 승인 스냅샷을 보존하는 보조 시각 자료로 사용하며, Figma MCP를 작업의 필수 의존성으로 두지 않는다.
 - Wireframe의 목적은 IA를 시각적 구현 계약으로 전환하는 것이다.
 - Wireframe 단계에서는 정보 위계, 레이아웃, 섹션 순서, 콘텐츠 밀도, 내비게이션, 주요 반응형 변화를 결정한다.
 - 정확한 브랜드 컬러, 최종 폰트, 고충실도 시각 효과, 복잡한 애니메이션은 기본적으로 Wireframe 범위가 아니다.
-- 승인 시점의 주요 화면은 PNG snapshot으로 저장소에 보존할 수 있다.
+- Wireframe prototype은 제품 코드가 아니다. 실제 구현 단계에서 그대로 배포한다고 가정하지 않는다.
+- 승인 후 `docs/02_WIREFRAME.md`가 구조적 원칙과 승인 대상을 정본으로 고정한다.
 - 별도 고충실도 UI 디자인 단계는 현재 기본 공정에 포함하지 않는다. 필요성이 확인될 때만 별도 결정한다.
+
+## Wireframe Review
+
+로컬에서 다음과 같이 검토할 수 있다.
+
+```bash
+python3 -m http.server 8080
+```
+
+```text
+http://localhost:8080/design/wireframe/
+```
+
+우선 모바일 검토 대상:
+
+- Home
+- Work
+- Writing
+- Writing Detail
 
 ## Scope Discipline
 
