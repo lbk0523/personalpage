@@ -47,7 +47,7 @@ AI agent와 작업자는 아래 순서로 읽는다.
 3. `docs/00_STRATEGY.md`
 4. `docs/01_IA.md`
 5. `docs/02_WIREFRAME.md` — APPROVED
-6. 현재 단계 문서 `docs/03_BUILD_SPEC.md` — 작성/승인 예정
+6. `docs/03_BUILD_SPEC.md` — REVIEW CANDIDATE ← NOW
 7. 필요 시 `docs/DECISIONS.md`
 
 ## Current Artifacts
@@ -57,7 +57,7 @@ docs/
 ├─ 00_STRATEGY.md
 ├─ 01_IA.md
 ├─ 02_WIREFRAME.md
-├─ 03_BUILD_SPEC.md        # NOW: 작성/승인 예정
+├─ 03_BUILD_SPEC.md        # NOW: REVIEW CANDIDATE
 └─ DECISIONS.md
 
 design/
