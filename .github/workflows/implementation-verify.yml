@@ -33,6 +33,11 @@ jobs:
           path: dist
           if-no-files-found: error
           retention-days: 3
+      - name: Install Korean font for screenshots
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+          fc-cache -f
       - name: Render browser QA screenshots
         run: |
           mkdir -p qa/screenshots
@@ -75,14 +80,14 @@ jobs:
               "http://127.0.0.1:4321${PATHNAME}"
           }
 
-          shot / 390 2600 home-mobile
-          shot /work 390 5200 work-mobile
-          shot /writing 390 2600 writing-mobile
-          shot /writing/weekend-after-becoming-a-dad 390 3600 writing-detail-mobile
-          shot / 1280 2200 home-desktop
-          shot /work 1280 3600 work-desktop
-          shot /_qa/timeline 1280 4400 timeline-comparison-desktop
-          shot /_qa/timeline 390 5600 timeline-comparison-mobile
+          shot / 390 2200 home-mobile
+          shot /work 390 3600 work-mobile
+          shot /writing 390 2000 writing-mobile
+          shot /writing/weekend-after-becoming-a-dad 390 2800 writing-detail-mobile
+          shot / 1280 1800 home-desktop
+          shot /work 1280 2600 work-desktop
+          shot /qa/timeline 1280 3400 timeline-comparison-desktop
+          shot /qa/timeline 390 3800 timeline-comparison-mobile
       - name: Upload browser QA screenshots
         uses: actions/upload-artifact@v4
         with:
