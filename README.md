@@ -6,8 +6,8 @@
 
 1. Strategy ✅
 2. IA ✅
-3. Wireframe ← NOW
-4. Build Spec
+3. Wireframe ✅
+4. Build Spec ← NOW
 5. Implementation
 6. Content
 7. Operation
@@ -35,8 +35,8 @@ Operation
 이 저장소의 승인된 문서를 프로젝트 정본으로 사용한다.
 대화 기록이나 개별 AI agent의 추정은 정본이 아니다.
 
-Wireframe 반복 검토의 기준은 `design/wireframe/`의 responsive HTML/CSS prototype이다.
-Figma는 초기 탐색과 시각적 참고/승인 기록용으로 사용하며 필수 의존성으로 두지 않는다.
+승인된 Wireframe 구조의 기준은 `design/wireframe/`의 responsive HTML/CSS prototype과 `docs/02_WIREFRAME.md`다.
+Figma는 초기 탐색과 시각적 참고 기록용으로 사용하며 필수 의존성으로 두지 않는다.
 
 ## Start Here
 
@@ -46,8 +46,9 @@ AI agent와 작업자는 아래 순서로 읽는다.
 2. `AGENTS.md`
 3. `docs/00_STRATEGY.md`
 4. `docs/01_IA.md`
-5. `docs/02_WIREFRAME.md` — 현재 REVIEW CANDIDATE
-6. 필요 시 `docs/DECISIONS.md`
+5. `docs/02_WIREFRAME.md` — APPROVED
+6. 현재 단계 문서 `docs/03_BUILD_SPEC.md` — 작성/승인 예정
+7. 필요 시 `docs/DECISIONS.md`
 
 ## Current Artifacts
 
@@ -56,7 +57,7 @@ docs/
 ├─ 00_STRATEGY.md
 ├─ 01_IA.md
 ├─ 02_WIREFRAME.md
-├─ 03_BUILD_SPEC.md        # Wireframe 승인 후 생성
+├─ 03_BUILD_SPEC.md        # NOW: 작성/승인 예정
 └─ DECISIONS.md
 
 design/
@@ -84,4 +85,6 @@ python3 -m http.server 8080
 http://localhost:8080/design/wireframe/
 ```
 
-Wireframe 승인 전에는 `03_BUILD_SPEC.md`를 만들지 않는다.
+## Deferred Design Requirement
+
+Work의 `걸어온 길` Career Timeline은 Wireframe의 정보 구조를 유지하되, 최종 웹디자인에서 단순 연도/텍스트 목록보다 경력의 흐름과 전환이 시각적으로 느껴지는 표현으로 refinement한다.
