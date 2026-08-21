@@ -1,7 +1,8 @@
 # Personal Page — Build Spec
 
-Status: REVIEW CANDIDATE
-Last Updated: 2026-08-21
+Status: APPROVED
+Approved: 2026-08-22
+Last Updated: 2026-08-22
 
 ## 1. Purpose
 
@@ -851,11 +852,11 @@ npm run build
 
 ---
 
-## 19. Approval Gate
+## 19. Approval Result
 
-이 문서는 현재 `REVIEW CANDIDATE`다.
+2026-08-22 사용자 검토 결과 Build Spec을 승인했다.
 
-Build Spec APPROVED를 위해 확인할 주요 결정:
+승인된 주요 결정:
 
 1. Astro static을 v1 framework로 사용
 2. Node 24 LTS + npm
@@ -868,12 +869,9 @@ Build Spec APPROVED를 위해 확인할 주요 결정:
 9. 현재 v1 포함/제외 범위
 10. Implementation Definition of Done
 
-승인 후:
+Astro는 콘텐츠 중심 개인 사이트에 적합한 정적 사이트 프레임워크로 사용하며, Astro 자체를 이유로 React/JS 중심의 복잡한 앱 구조로 확장하지 않는다.
 
-1. 본 문서 Status를 `APPROVED`로 변경
-2. `README.md`의 Current Phase를 `Implementation ← NOW`로 변경
-3. 필요 시 `docs/DECISIONS.md`에 기술 선택 결정 기록
-4. 구현 agent에게 Strategy → IA → Wireframe → Build Spec 순으로 전달
+다음 단계는 **Implementation**이다.
 
 ---
 
