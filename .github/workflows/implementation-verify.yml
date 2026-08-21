@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - implementation/astro-v1
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -30,7 +33,7 @@ jobs:
       - name: Production build
         run: npm run build
       - name: Commit generated implementation
-        if: github.actor != 'github-actions[bot]'
+        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
         run: |
           if ! git diff --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
             git config user.name "github-actions[bot]"
