@@ -32,6 +32,13 @@ jobs:
         run: npm run check
       - name: Production build
         run: npm run build
+      - name: Upload static build for visual QA
+        uses: actions/upload-artifact@v4
+        with:
+          name: personalpage-dist
+          path: dist
+          if-no-files-found: error
+          retention-days: 3
       - name: Commit generated implementation
         if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
         run: |
