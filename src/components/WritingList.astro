@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type Props = {
+  entries: CollectionEntry<'writing'>[];
+};
+
+const { entries } = Astro.props;
+const formatter = new Intl.DateTimeFormat('ko-KR', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+});
+---
+<ul class="writing-list">
+  {
+    entries.map((entry) => (
+      <li>
+        <time datetime={entry.data.publishedAt.toISOString()}>{formatter.format(entry.data.publishedAt)}</time>
+        <div>
+          <h2><a href={`/writing/${entry.id}/`}>{entry.data.title}</a></h2>
+          <p>{entry.data.description}</p>
+        </div>
+      </li>
+    ))
+  }
+</ul>

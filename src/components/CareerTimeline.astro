@@ -1,0 +1,25 @@
+---
+import { career } from '../data/career';
+---
+<ol class="career-timeline" aria-label="경력 흐름">
+  {
+    career.map((item, index) => (
+      <li class="career-timeline__item">
+        <div class="career-timeline__rail" aria-hidden="true">
+          <span class="career-timeline__dot" />
+          {index < career.length - 1 && <span class="career-timeline__line" />}
+        </div>
+        <div class="career-timeline__time">
+          <span>{item.start}</span>
+          {item.end && <span> — {item.end}</span>}
+        </div>
+        <div class="career-timeline__content">
+          <h3>{item.title}</h3>
+          {item.organization && <p class="career-timeline__organization">{item.organization}</p>}
+          {item.description && <p>{item.description}</p>}
+          {item.href && <a href={item.href}>관련 기록 보기 →</a>}
+        </div>
+      </li>
+    ))
+  }
+</ol>
