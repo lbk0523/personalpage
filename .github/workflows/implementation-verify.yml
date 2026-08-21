@@ -9,23 +9,17 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v5
         with:
           node-version: 24
-      - name: Bootstrap implementation files
-        run: python .implementation/bootstrap.py
-      - name: Generate lockfile when missing
-        if: hashFiles('package-lock.json') == ''
-        run: npm install --package-lock-only --ignore-scripts
+          cache: npm
       - name: Install dependencies
         run: npm ci
       - name: Astro check
@@ -39,13 +33,60 @@ jobs:
           path: dist
           if-no-files-found: error
           retention-days: 3
-      - name: Commit generated implementation
-        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+      - name: Render browser QA screenshots
         run: |
-          if ! git diff --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -- . ':!.implementation/bootstrap.py'
-            git commit -m "Bootstrap Astro implementation"
-            git push
+          mkdir -p qa/screenshots
+          npm run preview -- --host 127.0.0.1 --port 4321 >/tmp/personalpage-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT
+
+          READY=0
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4321/ >/dev/null; then
+              READY=1
+              break
+            fi
+            sleep 1
+          done
+          if [ "$READY" -ne 1 ]; then
+            cat /tmp/personalpage-preview.log
+            exit 1
           fi
+
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$BROWSER" ]; then
+            echo "No Chromium-compatible browser found on runner"
+            exit 1
+          fi
+
+          shot() {
+            PATHNAME="$1"
+            WIDTH="$2"
+            HEIGHT="$3"
+            OUTPUT="$4"
+            "$BROWSER" \
+              --headless \
+              --no-sandbox \
+              --disable-gpu \
+              --disable-dev-shm-usage \
+              --hide-scrollbars \
+              --window-size="${WIDTH},${HEIGHT}" \
+              --screenshot="qa/screenshots/${OUTPUT}.png" \
+              "http://127.0.0.1:4321${PATHNAME}"
+          }
+
+          shot / 390 2600 home-mobile
+          shot /work 390 5200 work-mobile
+          shot /writing 390 2600 writing-mobile
+          shot /writing/weekend-after-becoming-a-dad 390 3600 writing-detail-mobile
+          shot / 1280 2200 home-desktop
+          shot /work 1280 3600 work-desktop
+          shot /_qa/timeline 1280 4400 timeline-comparison-desktop
+          shot /_qa/timeline 390 5600 timeline-comparison-mobile
+      - name: Upload browser QA screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: personalpage-qa-screenshots
+          path: qa/screenshots
+          if-no-files-found: error
+          retention-days: 3
