@@ -80,14 +80,16 @@ jobs:
               "http://127.0.0.1:4321${PATHNAME}"
           }
 
-          shot / 390 2200 home-mobile
-          shot /work 390 3600 work-mobile
-          shot /writing 390 2000 writing-mobile
-          shot /writing/weekend-after-becoming-a-dad 390 2800 writing-detail-mobile
-          shot / 1280 1800 home-desktop
-          shot /work 1280 2600 work-desktop
-          shot /qa/timeline 1280 3400 timeline-comparison-desktop
-          shot /qa/timeline 390 3800 timeline-comparison-mobile
+          shot / 320 2300 home-320
+          shot /work 320 3900 work-320
+          shot / 390 2200 home-390
+          shot /work 390 3600 work-390
+          shot /writing 390 2000 writing-390
+          shot /writing/weekend-after-becoming-a-dad 390 2800 writing-detail-390
+          shot / 1280 1800 home-1280
+          shot /work 1280 2600 work-1280
+          shot / 1440 1800 home-1440
+          shot /work 1440 2600 work-1440
       - name: Upload browser QA screenshots
         uses: actions/upload-artifact@v4
         with:
