@@ -1,0 +1,41 @@
+name: Implementation Verify
+
+on:
+  push:
+    branches:
+      - implementation/astro-v1
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Bootstrap implementation files
+        run: python .implementation/bootstrap.py
+      - name: Generate lockfile when missing
+        if: hashFiles('package-lock.json') == ''
+        run: npm install --package-lock-only --ignore-scripts
+      - name: Install dependencies
+        run: npm ci
+      - name: Astro check
+        run: npm run check
+      - name: Production build
+        run: npm run build
+      - name: Commit generated implementation
+        if: github.actor != 'github-actions[bot]'
+        run: |
+          if ! git diff --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -- . ':!.implementation/bootstrap.py'
+            git commit -m "Bootstrap Astro implementation"
+            git push
+          fi
