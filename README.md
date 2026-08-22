@@ -39,6 +39,7 @@ Operation
 Figma는 초기 탐색과 시각적 참고 기록용으로 사용하며 필수 의존성으로 두지 않는다.
 
 구현은 `docs/03_BUILD_SPEC.md`의 기술 계약과 Acceptance Criteria를 따른다.
+로컬 Codex 인계 시에는 `docs/04_LOCAL_CODEX_HANDOFF.md`의 현재 브랜치·PR·남은 관문 정보를 함께 따른다.
 
 ## Start Here
 
@@ -50,7 +51,8 @@ AI agent와 작업자는 아래 순서로 읽는다.
 4. `docs/01_IA.md`
 5. `docs/02_WIREFRAME.md` — APPROVED
 6. `docs/03_BUILD_SPEC.md` — APPROVED
-7. 필요 시 `docs/DECISIONS.md`
+7. `docs/DECISIONS.md`
+8. `docs/04_LOCAL_CODEX_HANDOFF.md` — 현재 구현 인계 상태
 
 ## Current Artifacts
 
@@ -60,6 +62,7 @@ docs/
 ├─ 01_IA.md
 ├─ 02_WIREFRAME.md
 ├─ 03_BUILD_SPEC.md
+├─ 04_LOCAL_CODEX_HANDOFF.md
 └─ DECISIONS.md
 
 design/
@@ -74,6 +77,22 @@ design/
    ├─ styles.css
    └─ README.md
 ```
+
+## Current Implementation Handoff
+
+현재 구현은 아래 브랜치에서 진행 중이다.
+
+```text
+implementation/astro-v1
+```
+
+Draft PR:
+
+```text
+#1 Implement Astro v1 site skeleton
+```
+
+로컬 Codex 또는 새로운 agent가 구현을 이어갈 때는 먼저 `docs/04_LOCAL_CODEX_HANDOFF.md`를 확인한다.
 
 ## Local Wireframe Review
 
@@ -90,6 +109,8 @@ http://localhost:8080/design/wireframe/
 ## Deferred Design Requirement
 
 Work의 `걸어온 길` Career Timeline은 Wireframe의 정보 구조를 유지하되, 최종 웹디자인에서 단순 연도/텍스트 목록보다 경력의 흐름과 전환이 시각적으로 느껴지는 표현으로 refinement한다.
+
+현재 구현 브랜치에서는 이 요구를 infographic-style Career Map으로 반영했다.
 
 ## Implementation Stop Rule
 
