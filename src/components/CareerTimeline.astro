@@ -1,107 +1,41 @@
 ---
 import { career } from '../data/career';
+
+const chronological = [...career].reverse();
 ---
+<div class="career-map" aria-labelledby="career-map-title">
+  <div class="career-map__intro">
+    <p class="eyebrow">Career map</p>
+    <p id="career-map-title" class="career-map__summary">
+      라이브 서비스 가까이에서 시작해 콘텐츠를 만들었고, 지금은 제품과 사업 전체를 함께 봅니다.
+    </p>
+  </div>
 
-<ol class="career-chapters" aria-label="경력 흐름">
-  {
-    career.map((item, index) => (
-      <li class="career-chapters__item">
-        <div class="career-chapters__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
-        <div class="career-chapters__time">
-          <span class="career-chapters__start">{item.start}</span>
-          {item.end && <span class="career-chapters__end">— {item.end}</span>}
-        </div>
-        <div class="career-chapters__content">
-          <h3>{item.title}</h3>
-          {item.organization && <p class="career-chapters__organization">{item.organization}</p>}
-          {item.description && <p>{item.description}</p>}
-          {item.href && <a href={item.href}>관련 기록 보기 →</a>}
-        </div>
-      </li>
-    ))
-  }
-</ol>
+  <ol class="career-map__route" aria-label="경력 흐름">
+    {
+      chronological.map((item, index) => (
+        <li class="career-map__stop">
+          <div class="career-map__station" aria-hidden="true">
+            <span class="career-map__station-number">{String(index + 1).padStart(2, '0')}</span>
+            <span class="career-map__station-dot" />
+          </div>
 
-<style>
-  .career-chapters {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    border-top: 1px solid var(--color-border);
-  }
+          <div class="career-map__visual" aria-hidden="true">
+            <span>{item.title.replace('게임 ', '').replace('콘텐츠 ', '').replace('와 운영', '')}</span>
+          </div>
 
-  .career-chapters__item {
-    display: grid;
-    grid-template-columns: 52px minmax(160px, 0.4fr) 1fr;
-    gap: 1.25rem;
-    padding: 2rem 0 2.35rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .career-chapters__number {
-    padding-top: 0.5rem;
-    color: var(--color-muted);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-  }
-
-  .career-chapters__time {
-    line-height: 1;
-  }
-
-  .career-chapters__start {
-    display: block;
-    color: #c5c5bf;
-    font-size: clamp(2rem, 5vw, 3.8rem);
-    font-weight: 650;
-    letter-spacing: -0.07em;
-  }
-
-  .career-chapters__end {
-    display: block;
-    margin-top: 0.35rem;
-    color: var(--color-muted);
-    font-size: 0.85rem;
-    letter-spacing: -0.01em;
-  }
-
-  .career-chapters__content {
-    padding-top: 0.2rem;
-  }
-
-  .career-chapters__content h3 {
-    margin-bottom: 0.35rem;
-    font-size: clamp(1.2rem, 2.4vw, 1.55rem);
-  }
-
-  .career-chapters__content p {
-    max-width: 560px;
-    margin-bottom: 0.55rem;
-    color: var(--color-muted);
-  }
-
-  .career-chapters__organization {
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 760px) {
-    .career-chapters__item {
-      grid-template-columns: 28px 1fr;
-      gap: 0.75rem 0.9rem;
-      padding: 1.6rem 0 1.9rem;
+          <div class="career-map__content">
+            <div class="career-map__time">
+              <span>{item.start}</span>
+              {item.end && <span> — {item.end}</span>}
+            </div>
+            <h3>{item.title}</h3>
+            {item.organization && <p class="career-map__organization">{item.organization}</p>}
+            {item.description && <p>{item.description}</p>}
+            {item.href && <a href={item.href}>관련 기록 보기 →</a>}
+          </div>
+        </li>
+      ))
     }
-
-    .career-chapters__number {
-      grid-row: 1 / span 2;
-    }
-
-    .career-chapters__time,
-    .career-chapters__content {
-      grid-column: 2;
-    }
-
-    .career-chapters__start {
-      font-size: clamp(2rem, 12vw, 2.9rem);
-    }
-  }
-</style>
+  </ol>
+</div>
