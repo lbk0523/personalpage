@@ -7,7 +7,7 @@ const chronological = [...career].reverse();
   <div class="career-map__intro">
     <p class="eyebrow">Career map</p>
     <p id="career-map-title" class="career-map__summary">
-      라이브 서비스 가까이에서 시작해 콘텐츠를 만들었고, 지금은 제품과 사업 전체를 함께 봅니다.
+      서비스 운영에서 시작해 콘텐츠를 만들었고, 지금은 제품과 사업 전체를 봅니다.
     </p>
   </div>
 
@@ -32,7 +32,7 @@ const chronological = [...career].reverse();
             <h3>{item.title}</h3>
             {item.organization && <p class="career-map__organization">{item.organization}</p>}
             {item.description && <p>{item.description}</p>}
-            {item.href && <a href={item.href}>관련 기록 보기 →</a>}
+            {item.href && <a href={item.href}>관련 글 보기 →</a>}
           </div>
         </li>
       ))
