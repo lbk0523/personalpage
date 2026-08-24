@@ -290,3 +290,26 @@ Work의 Career Map 구조와 visual grammar는 유지하며 blue scale만 정돈
 사용자는 전체 페이지가 한 font family를 유지하는 편이 안정적이라고 판단했고, AI 제작물에서 자주 보이는 과도한 곡률과 카드화를 피하고 싶다고 명확히 밝혔다. 따뜻한 editorial 바탕은 개인 홈페이지의 읽기 성격을 살리고, 절제된 blue는 사용자가 선호하는 색이면서 링크와 상태의 신뢰감 있는 기준점이 된다.
 
 이 결정은 정보 구조나 기능 범위를 바꾸지 않고, foundation 안에서 위계와 간격, 표면의 깊이를 일관되게 만드는 refinement다.
+
+---
+
+## D-016 — 2026-08-24 — fixture를 제외한 상태로 Cloudflare Pages production 공개
+
+### Decision
+
+`lbk0523/personalpage`의 Astro v1 구현을 Cloudflare Pages project `byungklee`에 GitHub integration으로 연결하고 `https://byungklee.pages.dev`를 canonical production URL로 사용한다.
+
+Production 운영 범위는 다음과 같다.
+
+- production branch는 `main`
+- build command는 `npm run build`
+- build output directory는 `dist`
+- Node version은 `24.19.0`
+- `SITE_URL`은 `https://byungklee.pages.dev`
+- non-production branch의 자동 preview 배포는 비활성화
+- 구조 검증용 Work/Writing fixture 두 개는 `draft: true`로 유지하여 public 목록, 상세 경로, RSS, sitemap에서 제외
+- 실제 공개용 Work/Writing 원고는 Content 단계에서 사용자 검토 후 게시
+
+### Reason
+
+사이트 구현과 배포 환경을 먼저 마련한 뒤 실제 콘텐츠를 축적한다는 D-003의 실행 순서를 따르면서도, fixture를 실제 개인 원고처럼 공개하지 않기 위함이다. production URL과 Git 연동을 먼저 안정화하면 이후 Content 단계에서 승인된 원고를 저장소에 반영하는 것만으로 일관된 배포 절차를 사용할 수 있다.

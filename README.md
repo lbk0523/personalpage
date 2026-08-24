@@ -8,8 +8,8 @@
 2. IA ✅
 3. Wireframe ✅
 4. Build Spec ✅
-5. Implementation ← NOW
-6. Content
+5. Implementation ✅
+6. Content ← NOW
 7. Operation
 
 ## Project Workflow
@@ -53,7 +53,7 @@ AI agent와 작업자는 아래 순서로 읽는다.
 6. `docs/03_BUILD_SPEC.md` — APPROVED
 7. `docs/DECISIONS.md`
 8. `docs/05_DESIGN_FOUNDATION.md` — APPROVED
-9. `docs/04_LOCAL_CODEX_HANDOFF.md` — 현재 구현 인계 상태
+9. `docs/04_LOCAL_CODEX_HANDOFF.md` — 현재 production 및 Content 인계 상태
 
 ## Current Artifacts
 
@@ -80,21 +80,23 @@ design/
    └─ README.md
 ```
 
-## Current Implementation Handoff
+## Current Production
 
-현재 구현은 아래 브랜치에서 진행 중이다.
-
-```text
-implementation/astro-v1
-```
-
-Draft PR:
+Production URL:
 
 ```text
-#1 Implement Astro v1 site skeleton
+https://byungklee.pages.dev
 ```
 
-로컬 Codex 또는 새로운 agent가 구현을 이어갈 때는 먼저 `docs/04_LOCAL_CODEX_HANDOFF.md`를 확인한다.
+- Cloudflare Pages project: `byungklee`
+- Production branch: `main`
+- GitHub repository: `lbk0523/personalpage`
+- PR #1 `Implement Astro v1 site skeleton`: squash merged
+- Production deployment: commit `3883d07`
+- Automatic preview branch deployments: disabled
+- Fixture Work/Writing entries: `draft: true`, public output에서 제외
+
+다음 작업은 Content 단계다. 로컬 Codex 또는 새로운 agent가 이어갈 때는 먼저 `docs/04_LOCAL_CODEX_HANDOFF.md`를 확인한다.
 
 ## Local Wireframe Review
 
@@ -112,7 +114,7 @@ http://localhost:8080/design/wireframe/
 
 Work의 `걸어온 길` Career Timeline은 Wireframe의 정보 구조를 유지하되, 최종 웹디자인에서 단순 연도/텍스트 목록보다 경력의 흐름과 전환이 시각적으로 느껴지는 표현으로 refinement한다.
 
-현재 구현 브랜치에서는 이 요구를 infographic-style Career Map으로 반영했다.
+현재 production 구현에는 이 요구를 infographic-style Career Map으로 반영했다.
 
 ## Implementation Stop Rule
 
