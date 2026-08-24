@@ -10,7 +10,8 @@ Latest implementation update:
 - `docs/05_DESIGN_FOUNDATION.md`와 `src/styles/tokens.css`가 foundation의 현재 기준이다.
 - 사용자 검토를 거쳐 warm editorial, square grouped surface, muted ink blue, self-hosted Wanted Sans 방향을 확정하고 구현했다.
 - fixture 콘텐츠는 production에서 제외하기로 승인되어 `draft: true`로 전환했다.
-- 현재 남은 공개 전 관문은 canonical URL과 최종 production 승인이다.
+- canonical URL은 `https://byungklee.pages.dev`로 승인됐다.
+- PR merge, Cloudflare GitHub integration, production 배포 실행도 승인됐으며 현재 실행과 smoke test가 남아 있다.
 
 ## 1. Purpose
 
@@ -344,12 +345,12 @@ Build command: npm run build
 Build output directory: dist
 ```
 
-현재 `astro.config.mjs`는 `SITE_URL` 환경변수를 사용하고, 없을 경우 임시 canonical origin을 사용한다.
+현재 `astro.config.mjs`는 `SITE_URL` 환경변수를 사용하고, 없을 경우 승인된 canonical origin인 `https://byungklee.pages.dev`를 사용한다.
 
 production 배포 전 해야 할 일:
 
-1. 실제 공개 URL 또는 Cloudflare Pages production URL 확정
-2. `SITE_URL`에 실제 canonical origin 설정
+1. canonical URL `https://byungklee.pages.dev` 확인
+2. Cloudflare production `SITE_URL`에 같은 canonical origin 설정
 3. fixture Work/Writing 콘텐츠의 `draft: true`와 public output 제외 상태 확인
 4. 실제 콘텐츠는 사용자 원고가 준비된 뒤 별도로 교체
 5. 최종 `npm ci && npm run check && npm run build`
@@ -390,6 +391,8 @@ fixture Work/Writing은 `draft: true`로 유지한다. 실제 콘텐츠는 사�
 - 실제 공개용 Work 내용 창작
 - 실제 공개용 Writing 원고 창작
 
+2026-08-24 사용자는 이번 PR merge, Cloudflare GitHub integration, production 배포 실행을 승인했다.
+
 ---
 
 ## 12. Implementation Definition of Done
@@ -402,8 +405,9 @@ Build Spec의 Implementation DoD:
 
 남은 핵심은:
 
-- 실제 canonical URL 확정
-- production publication gate
+- PR merge
+- Cloudflare GitHub integration과 production 배포
+- production URL smoke test
 
 추가 기능을 구현하여 Implementation을 불필요하게 연장하지 않는다.
 
@@ -443,7 +447,7 @@ Build Spec의 Implementation DoD:
 4. 한국어 copy pass와 승인된 foundation/design edge 구현이 완료됐다.
 5. fixture 콘텐츠는 production에서 제외하기로 결정됐다.
 6. 로컬 Node 24 검증과 핵심 화면 browser QA는 통과했다.
-7. production merge/deploy는 사용자 승인 관문이다.
+7. canonical은 `https://byungklee.pages.dev`이며 production merge/deploy 실행이 승인됐다.
 8. SEED는 구조와 원칙을 참고할 뿐이며, 당근 브랜드나 React 컴포넌트를 복제하지 않는다.
 
 이 문서를 읽은 뒤 기존 결정을 다시 처음부터 재논의하지 말고, 현재 단계에서 필요한 검증/수정/배포 준비로 바로 이어간다.
