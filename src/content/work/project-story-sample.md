@@ -5,7 +5,7 @@ period: "샘플 기간"
 role: "샘플 역할"
 kind: professional
 order: 1
-draft: false
+draft: true
 ---
 
 이 페이지는 프로젝트 상세 화면의 구조와 읽기 흐름을 확인하기 위한 샘플입니다. 실제 프로젝트 내용은 아닙니다.

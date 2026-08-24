@@ -9,7 +9,8 @@ Latest implementation update:
 - 사용자 피드백에 따라 SEED Design을 참고한 local design foundation을 구현했다.
 - `docs/05_DESIGN_FOUNDATION.md`와 `src/styles/tokens.css`가 foundation의 현재 기준이다.
 - 사용자 검토를 거쳐 warm editorial, square grouped surface, muted ink blue, self-hosted Wanted Sans 방향을 확정하고 구현했다.
-- 현재 남은 공개 전 관문은 fixture 콘텐츠, canonical URL, 최종 production 승인이다.
+- fixture 콘텐츠는 production에서 제외하기로 승인되어 `draft: true`로 전환했다.
+- 현재 남은 공개 전 관문은 canonical URL과 최종 production 승인이다.
 
 ## 1. Purpose
 
@@ -321,6 +322,8 @@ src/content/writing/weekend-after-becoming-a-dad.md
 
 이 파일들은 콘텐츠 모델과 route를 검증하기 위해 존재한다.
 
+2026-08-24 사용자 승인에 따라 두 fixture는 `draft: true`로 유지하며 production 공개 대상에서 제외한다. 따라서 public 목록, 상세 static path, RSS, sitemap에 포함하지 않는다.
+
 원칙:
 
 - 실제 공개용 콘텐츠를 사용자 확인 없이 임의 창작하여 대체하지 않는다.
@@ -347,8 +350,8 @@ production 배포 전 해야 할 일:
 
 1. 실제 공개 URL 또는 Cloudflare Pages production URL 확정
 2. `SITE_URL`에 실제 canonical origin 설정
-3. fixture Work/Writing 콘텐츠를 그대로 공개할지 사용자와 확인
-4. 사용자가 실제 콘텐츠 교체를 원하면 먼저 교체
+3. fixture Work/Writing 콘텐츠의 `draft: true`와 public output 제외 상태 확인
+4. 실제 콘텐츠는 사용자 원고가 준비된 뒤 별도로 교체
 5. 최종 `npm ci && npm run check && npm run build`
 6. 모바일/데스크톱 browser QA
 7. 사용자 배포 승인
@@ -362,9 +365,7 @@ production 배포 전 해야 할 일:
 
 > Home / Work / Now / About은 현재 상태로 두고, 샘플 Work/Writing 2개를 실제 첫 콘텐츠로 교체한 뒤 공개하는 편이 깔끔하다.
 
-하지만 이는 **권고**이며 아직 사용자가 fixture 공개 여부를 최종 결정하지 않았다.
-
-따라서 로컬 Codex는 production 배포 직전에 반드시 이 관문을 명시한다.
+2026-08-24 사용자는 production에서 fixture를 제외하는 권고안에 동의했다. 실제 공개 원고가 준비될 때까지 두 fixture를 `draft: true`로 유지한다.
 
 ---
 
@@ -376,7 +377,7 @@ production 배포 전 해야 할 일:
 
 ### B. Content and publication gate
 
-fixture Work/Writing을 실제 콘텐츠로 교체할지 사용자와 결정한다. 사용자 사실이나 원고는 임의로 만들지 않는다.
+fixture Work/Writing은 `draft: true`로 유지한다. 실제 콘텐츠는 사용자 원고가 준비된 뒤 교체하며, 사용자 사실이나 원고는 임의로 만들지 않는다.
 
 ### C. Report to user before destructive/public actions
 
@@ -385,7 +386,7 @@ fixture Work/Writing을 실제 콘텐츠로 교체할지 사용자와 결정한�
 - PR merge
 - production deploy
 - custom domain 연결
-- fixture 콘텐츠 공개 결정
+- fixture 콘텐츠를 `draft: false`로 바꾸는 결정
 - 실제 공개용 Work 내용 창작
 - 실제 공개용 Writing 원고 창작
 
@@ -401,7 +402,6 @@ Build Spec의 Implementation DoD:
 
 남은 핵심은:
 
-- 실제 공개 콘텐츠 / fixture 처리 결정
 - 실제 canonical URL 확정
 - production publication gate
 
@@ -441,7 +441,7 @@ Build Spec의 Implementation DoD:
 2. 제품 전략/IA/Wireframe/Build Spec은 이미 승인됐다.
 3. Work visual direction도 현재 수준으로 유지한다.
 4. 한국어 copy pass와 승인된 foundation/design edge 구현이 완료됐다.
-5. fixture 콘텐츠 공개 여부는 미결정이다.
+5. fixture 콘텐츠는 production에서 제외하기로 결정됐다.
 6. 로컬 Node 24 검증과 핵심 화면 browser QA는 통과했다.
 7. production merge/deploy는 사용자 승인 관문이다.
 8. SEED는 구조와 원칙을 참고할 뿐이며, 당근 브랜드나 React 컴포넌트를 복제하지 않는다.

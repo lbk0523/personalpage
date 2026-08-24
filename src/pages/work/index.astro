@@ -7,6 +7,7 @@ import '../../styles/work.css';
 const works = (await getCollection('work', ({ data }) => !data.draft)).sort(
   (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999),
 );
+const principlesIndex = works.length > 0 ? '04' : '03';
 ---
 <BaseLayout title="Work" description="게임 업계에서 해온 일과 맡아온 역할.">
   <section class="page-intro work-intro">
@@ -34,30 +35,32 @@ const works = (await getCollection('work', ({ data }) => !data.draft)).sort(
     </div>
   </section>
 
-  <section class="section work-index-section">
-    <div class="section-heading">
-      <p class="eyebrow">03 / Work</p>
-      <h2>해본 것들</h2>
-    </div>
-    <ul class="work-list work-traces">
-      {works.map((entry, index) => (
-        <li>
-          <a href={`/work/${entry.id}/`}>
-            <span class="work-list__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-            <span class="work-list__content">
-              <strong>{entry.data.title}</strong>
-              <small>{entry.data.summary}</small>
-            </span>
-            <span class="work-list__arrow" aria-hidden="true">↗</span>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
+  {works.length > 0 && (
+    <section class="section work-index-section">
+      <div class="section-heading">
+        <p class="eyebrow">03 / Work</p>
+        <h2>해본 것들</h2>
+      </div>
+      <ul class="work-list work-traces">
+        {works.map((entry, index) => (
+          <li>
+            <a href={`/work/${entry.id}/`}>
+              <span class="work-list__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <span class="work-list__content">
+                <strong>{entry.data.title}</strong>
+                <small>{entry.data.summary}</small>
+              </span>
+              <span class="work-list__arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 
   <section class="section narrative-section work-principles-section">
     <div class="section-heading">
-      <p class="eyebrow">04 / Principles</p>
+      <p class="eyebrow">{principlesIndex} / Principles</p>
       <h2>일하면서 생긴 기준</h2>
     </div>
     <div class="prose prose--compact work-principles">

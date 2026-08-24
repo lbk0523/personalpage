@@ -6,7 +6,7 @@ type: note
 topics:
   - parenting
 series: "아빠들의 육아 대화"
-draft: false
+draft: true
 ---
 
 아이가 생기고 나서 주말의 의미가 꽤 달라졌다. 예전에는 내가 무엇을 하고 싶은지가 먼저였다면, 이제는 세 사람이 함께 보내는 시간이 어떻게 흘러갈지를 생각하게 된다.
