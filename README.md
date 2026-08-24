@@ -52,7 +52,8 @@ AI agent와 작업자는 아래 순서로 읽는다.
 5. `docs/02_WIREFRAME.md` — APPROVED
 6. `docs/03_BUILD_SPEC.md` — APPROVED
 7. `docs/DECISIONS.md`
-8. `docs/04_LOCAL_CODEX_HANDOFF.md` — 현재 구현 인계 상태
+8. `docs/05_DESIGN_FOUNDATION.md` — APPROVED
+9. `docs/04_LOCAL_CODEX_HANDOFF.md` — 현재 구현 인계 상태
 
 ## Current Artifacts
 
@@ -63,6 +64,7 @@ docs/
 ├─ 02_WIREFRAME.md
 ├─ 03_BUILD_SPEC.md
 ├─ 04_LOCAL_CODEX_HANDOFF.md
+├─ 05_DESIGN_FOUNDATION.md
 └─ DECISIONS.md
 
 design/

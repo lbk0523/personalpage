@@ -41,12 +41,13 @@ SEED의 당근 브랜드 색상, 제품 컴포넌트 외형, React 구현은 가
 
 ```text
 foreground: default / muted / subtle / accent / accent-strong / inverted
-background: canvas / surface / surface-weak / surface-pressed / accent-weak / accent / inverted
+background: canvas / surface / surface-weak / surface-pressed / accent-subtle / accent-weak / accent / inverted
 stroke: subtle / muted / contrast / accent / focus
 typography: display-title / page-title / reading-title / section-title / item-title / lead / body / meta
 spacing: page-inline / page-start / page-end / intro-end / section / list-row
 shape: control / surface / feature / round
-state: surface / interactive / motion-interactive
+elevation: surface
+motion: interactive
 ```
 
 ### Component

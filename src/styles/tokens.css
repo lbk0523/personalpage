@@ -74,7 +74,6 @@
   --ref-ease-standard: cubic-bezier(0.2, 0, 0, 1);
 
   --ref-shadow-s1: 0 1px 2px rgb(40 38 34 / 5%), 0 12px 30px rgb(40 38 34 / 5%);
-  --ref-shadow-s2: 0 2px 10px rgb(40 38 34 / 12%);
 
   /* Semantic color roles */
   --color-fg-default: var(--ref-color-neutral-1000);
@@ -87,6 +86,7 @@
   --color-bg-surface: var(--ref-color-neutral-0);
   --color-bg-surface-weak: var(--ref-color-neutral-100);
   --color-bg-surface-pressed: var(--ref-color-neutral-100);
+  --color-bg-accent-subtle: var(--ref-color-blue-50);
   --color-bg-accent-weak: var(--ref-color-blue-100);
   --color-bg-accent: var(--ref-color-blue-700);
   --color-bg-inverted: var(--ref-color-neutral-1000);
@@ -97,9 +97,9 @@
   --color-stroke-focus: var(--ref-color-blue-700);
 
   /* Semantic typography roles */
-  --type-display-title-size: clamp(3.5rem, 7.5vw, 5.5rem);
-  --type-page-title-size: clamp(3.25rem, 6vw, 4.25rem);
-  --type-reading-title-size: clamp(2.75rem, 5vw, 3.5rem);
+  --type-display-title-size: clamp(3rem, 13vw, 3.5rem);
+  --type-page-title-size: clamp(2.625rem, 11vw, 3.25rem);
+  --type-reading-title-size: clamp(2.125rem, 9vw, 2.75rem);
   --type-section-title-size: clamp(1.75rem, 3.2vw, 2.25rem);
   --type-item-title-size: var(--ref-font-size-t7);
   --type-lead-size: clamp(var(--ref-font-size-t6), 2vw, var(--ref-font-size-t8));
@@ -119,13 +119,13 @@
   /* Semantic spacing and layout roles */
   --spacing-between-text: var(--ref-space-x1-5);
   --spacing-component-default: var(--ref-space-x3);
-  --spacing-page-inline: var(--ref-space-x6);
-  --spacing-page-start: var(--ref-space-x18);
-  --spacing-page-end: var(--ref-space-x24);
-  --spacing-intro-end: var(--ref-space-x18);
-  --spacing-section-block: var(--ref-space-x12);
-  --spacing-section-column: clamp(var(--ref-space-x8), 6vw, var(--ref-space-x24));
-  --spacing-list-row: var(--ref-space-x6);
+  --spacing-page-inline: var(--ref-space-x3-5);
+  --spacing-page-start: var(--ref-space-x12);
+  --spacing-page-end: var(--ref-space-x18);
+  --spacing-intro-end: var(--ref-space-x12);
+  --spacing-section-block: var(--ref-space-x8);
+  --spacing-section-column: var(--ref-space-x6);
+  --spacing-list-row: var(--ref-space-x5);
   --layout-content-max: 67.5rem;
   --layout-reading-max: 45rem;
 
@@ -135,27 +135,26 @@
   --radius-feature: var(--ref-radius-r0);
   --radius-round: var(--ref-radius-full);
   --elevation-surface: var(--ref-shadow-s1);
-  --elevation-interactive: var(--ref-shadow-s2);
   --motion-interactive: var(--ref-duration-normal) var(--ref-ease-standard);
 }
 
-@media (max-width: 760px) {
+@media (min-width: 361px) {
   :root {
     --spacing-page-inline: var(--ref-space-x4);
-    --spacing-page-start: var(--ref-space-x12);
-    --spacing-page-end: var(--ref-space-x18);
-    --spacing-intro-end: var(--ref-space-x12);
-    --spacing-section-block: var(--ref-space-x8);
-    --spacing-section-column: var(--ref-space-x6);
-    --spacing-list-row: var(--ref-space-x5);
-    --type-display-title-size: clamp(3rem, 13vw, 3.5rem);
-    --type-page-title-size: clamp(2.625rem, 11vw, 3.25rem);
-    --type-reading-title-size: clamp(2.125rem, 9vw, 2.75rem);
   }
 }
 
-@media (max-width: 360px) {
+@media (min-width: 761px) {
   :root {
-    --spacing-page-inline: var(--ref-space-x3-5);
+    --spacing-page-inline: var(--ref-space-x6);
+    --spacing-page-start: var(--ref-space-x18);
+    --spacing-page-end: var(--ref-space-x24);
+    --spacing-intro-end: var(--ref-space-x18);
+    --spacing-section-block: var(--ref-space-x12);
+    --spacing-section-column: clamp(var(--ref-space-x8), 6vw, var(--ref-space-x24));
+    --spacing-list-row: var(--ref-space-x6);
+    --type-display-title-size: clamp(3.5rem, 7.5vw, 5.5rem);
+    --type-page-title-size: clamp(3.25rem, 6vw, 4.25rem);
+    --type-reading-title-size: clamp(2.75rem, 5vw, 3.5rem);
   }
 }
