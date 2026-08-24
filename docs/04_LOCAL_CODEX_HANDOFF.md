@@ -1,6 +1,6 @@
 # Personal Page — Local Codex Handoff
 
-Status: ACTIVE HANDOFF  
+Status: PRODUCTION DEPLOYED — CONTENT NEXT
 Updated: 2026-08-24 KST
 
 Latest implementation update:
@@ -11,13 +11,16 @@ Latest implementation update:
 - 사용자 검토를 거쳐 warm editorial, square grouped surface, muted ink blue, self-hosted Wanted Sans 방향을 확정하고 구현했다.
 - fixture 콘텐츠는 production에서 제외하기로 승인되어 `draft: true`로 전환했다.
 - canonical URL은 `https://byungklee.pages.dev`로 승인됐다.
-- PR merge, Cloudflare GitHub integration, production 배포 실행도 승인됐으며 현재 실행과 smoke test가 남아 있다.
+- PR #1은 squash merge됐고 `main`의 merge commit은 `3883d07a10935142cbe4a00b4d7ec184a4b92fbc`다.
+- Cloudflare Pages project `byungklee`가 GitHub repository `lbk0523/personalpage`와 연결됐다.
+- Production은 `https://byungklee.pages.dev`에 배포됐고 smoke test를 통과했다.
+- Production branch는 `main`이며 non-production branch의 자동 preview 배포는 비활성화했다.
 
 ## 1. Purpose
 
 이 문서는 ChatGPT에서 진행하던 `lbk0523/personalpage` 구현 작업을 사용자의 로컬 Codex 환경으로 넘기기 위한 실행용 핸드오프다.
 
-로컬 Codex는 이 대화 기록을 전제로 하지 말고 **GitHub 저장소의 승인 문서와 현재 구현 브랜치**를 정본으로 사용한다.
+로컬 Codex는 이 대화 기록을 전제로 하지 말고 **GitHub 저장소의 승인 문서와 현재 production 상태**를 정본으로 사용한다.
 
 ---
 
@@ -35,25 +38,25 @@ Default branch:
 main
 ```
 
-현재 구현 브랜치:
+현재 production 기준 브랜치:
 
 ```text
-implementation/astro-v1
+main
 ```
 
-현재 Draft PR:
+구현 PR:
 
 ```text
-#1 Implement Astro v1 site skeleton
+#1 Implement Astro v1 site skeleton — MERGED
 https://github.com/lbk0523/personalpage/pull/1
 ```
 
 중요:
 
-- `main`에는 아직 구현을 merge하지 않았다.
-- 구현/수정 작업은 우선 `implementation/astro-v1`에서 이어간다.
-- 사용자의 명시적 승인 전 production 배포를 임의 실행하지 않는다.
-- Draft PR을 임의 merge하지 않는다.
+- `main`의 `3883d07a10935142cbe4a00b4d7ec184a4b92fbc`가 현재 production source다.
+- 새 구현/문서 수정은 `main`에서 직접 하지 않고 별도 branch와 PR로 진행한다.
+- GitHub App은 `lbk0523/personalpage` 저장소 하나에만 접근하도록 제한했다.
+- 새 production 배포, Cloudflare 설정 변경, custom domain 연결은 사용자의 명시적 승인 없이 실행하지 않는다.
 
 ---
 
@@ -333,32 +336,38 @@ src/content/writing/weekend-after-becoming-a-dad.md
 
 ---
 
-## 10. Deployment Readiness
+## 10. Production Deployment Status
 
-기술적으로는 현재 static production build가 성공하므로 **배포 가능한 상태**다.
+2026-08-24 production 배포와 smoke test를 완료했다.
 
-Cloudflare Pages 예상 설정:
+Cloudflare Pages 현재 설정:
 
 ```text
+Project: byungklee
+Production URL: https://byungklee.pages.dev
 Production branch: main
 Build command: npm run build
 Build output directory: dist
+Root directory: repository root
+NODE_VERSION: 24.19.0
+SITE_URL: https://byungklee.pages.dev
+Automatic preview branch deployments: disabled
 ```
 
-현재 `astro.config.mjs`는 `SITE_URL` 환경변수를 사용하고, 없을 경우 승인된 canonical origin인 `https://byungklee.pages.dev`를 사용한다.
+GitHub integration은 `lbk0523/personalpage`에 연결되어 있고 production branch의 새 commit은 자동 production 배포 대상이다. non-production branch의 자동 preview 배포는 production-only 승인 범위에 맞춰 `None`으로 설정했다.
 
-production 배포 전 해야 할 일:
+완료된 검증:
 
-1. canonical URL `https://byungklee.pages.dev` 확인
-2. Cloudflare production `SITE_URL`에 같은 canonical origin 설정
-3. fixture Work/Writing 콘텐츠의 `draft: true`와 public output 제외 상태 확인
-4. 실제 콘텐츠는 사용자 원고가 준비된 뒤 별도로 교체
-5. 최종 `npm ci && npm run check && npm run build`
-6. 모바일/데스크톱 browser QA
-7. 사용자 배포 승인
-8. PR merge
-9. Cloudflare Pages 연결 / production deploy
-10. 배포 URL smoke test
+1. `npm ci`, `npm run check`, `npm run build` 통과
+2. PR #1 squash merge와 GitHub checks 통과
+3. Cloudflare build에서 commit `3883d07`과 Node `24.19.0` 사용 확인
+4. `/`, `/work/`, `/writing/`, `/now/`, `/about/`, `/rss.xml`, `/sitemap-index.xml` 200 확인
+5. 존재하지 않는 경로와 두 fixture 상세 경로 404 확인
+6. HTTP → HTTPS 301 확인
+7. canonical과 `og:url`이 `https://byungklee.pages.dev` 기준인지 확인
+8. sitemap과 RSS XML parse 확인
+9. sitemap, RSS, public 목록에서 fixture 참조가 없는지 확인
+10. Aside browser에서 production Home / Work / Writing / Now / About / 404 렌더링 확인
 
 ### Publication gate
 
@@ -376,9 +385,11 @@ production 배포 전 해야 할 일:
 
 `docs/05_DESIGN_FOUNDATION.md`와 D-015를 현재 디자인 기준으로 사용한다. 구조나 기능을 넓히지 않고 실제 콘텐츠가 들어올 때 필요한 작은 조정만 한다.
 
-### B. Content and publication gate
+### B. Content stage
 
 fixture Work/Writing은 `draft: true`로 유지한다. 실제 콘텐츠는 사용자 원고가 준비된 뒤 교체하며, 사용자 사실이나 원고는 임의로 만들지 않는다.
+
+Implementation Definition of Done과 production publication은 완료됐다. 다음 작업은 실제 공개용 Work/Writing 원고를 준비하고 사용자 검토를 거쳐 게시하는 것이다.
 
 ### C. Report to user before destructive/public actions
 
@@ -391,7 +402,7 @@ fixture Work/Writing은 `draft: true`로 유지한다. 실제 콘텐츠는 사�
 - 실제 공개용 Work 내용 창작
 - 실제 공개용 Writing 원고 창작
 
-2026-08-24 사용자는 이번 PR merge, Cloudflare GitHub integration, production 배포 실행을 승인했다.
+2026-08-24 사용자는 PR merge, Cloudflare GitHub integration, production 배포 실행을 승인했고 해당 작업은 완료됐다.
 
 ---
 
@@ -401,13 +412,7 @@ Build Spec의 Implementation DoD:
 
 > 승인된 핵심 화면이 desktop/mobile에서 안정적으로 렌더링되고, Markdown으로 Work/Writing을 게시할 수 있으며, production build와 기본 SEO/accessibility가 동작한다.
 
-현재 기술적으로는 이 기준을 충족한다. 아래 항목은 구현 DoD와 별개인 publication gate다.
-
-남은 핵심은:
-
-- PR merge
-- Cloudflare GitHub integration과 production 배포
-- production URL smoke test
+이 기준과 publication gate를 모두 충족했다. Implementation 단계는 완료됐으며 다음 단계는 Content다.
 
 추가 기능을 구현하여 Implementation을 불필요하게 연장하지 않는다.
 
@@ -432,8 +437,8 @@ Build Spec의 Implementation DoD:
 - 복잡한 animation 추가
 - 임의 SEO growth 기능 추가
 - `main` 직접 작업
-- PR #1 임의 merge
-- production 임의 deploy
+- 기존 production 설정 임의 변경
+- 승인 없는 production 재배포 또는 rollback
 
 ---
 
@@ -441,13 +446,14 @@ Build Spec의 Implementation DoD:
 
 로컬 Codex가 다음을 이해하면 핸드오프 성공이다.
 
-1. 현재 작업은 `implementation/astro-v1`에서 이어간다.
+1. 현재 production source는 `main`의 `3883d07`이며 새 작업은 별도 branch와 PR에서 진행한다.
 2. 제품 전략/IA/Wireframe/Build Spec은 이미 승인됐다.
 3. Work visual direction도 현재 수준으로 유지한다.
 4. 한국어 copy pass와 승인된 foundation/design edge 구현이 완료됐다.
 5. fixture 콘텐츠는 production에서 제외하기로 결정됐다.
 6. 로컬 Node 24 검증과 핵심 화면 browser QA는 통과했다.
-7. canonical은 `https://byungklee.pages.dev`이며 production merge/deploy 실행이 승인됐다.
-8. SEED는 구조와 원칙을 참고할 뿐이며, 당근 브랜드나 React 컴포넌트를 복제하지 않는다.
+7. canonical과 production URL은 `https://byungklee.pages.dev`이며 Cloudflare Pages production 배포와 smoke test가 완료됐다.
+8. non-production branch의 자동 preview 배포는 비활성화했다.
+9. SEED는 구조와 원칙을 참고할 뿐이며, 당근 브랜드나 React 컴포넌트를 복제하지 않는다.
 
-이 문서를 읽은 뒤 기존 결정을 다시 처음부터 재논의하지 말고, 현재 단계에서 필요한 검증/수정/배포 준비로 바로 이어간다.
+이 문서를 읽은 뒤 기존 결정을 다시 처음부터 재논의하지 말고 Content 단계의 실제 공개 원고 준비와 검토로 바로 이어간다.
