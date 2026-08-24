@@ -30,6 +30,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/fonts/wanted-sans/WantedSansVariable.css" />
     <link rel="alternate" type="application/rss+xml" title={`${profile.name} Writing RSS`} href="/rss.xml" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -40,7 +41,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
   <body>
     <a class="skip-link" href="#content">본문으로 건너뛰기</a>
     <SiteHeader />
-    <main id="content" class="site-shell page-main">
+    <main id="content" class="site-shell page-main" tabindex="-1">
       <slot />
     </main>
     <SiteFooter />

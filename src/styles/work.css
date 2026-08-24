@@ -1,50 +1,69 @@
 .work-intro {
-  max-width: 920px;
+  max-width: 57.5rem;
 }
 
 .career-section {
+  --career-column-gap: var(--spacing-section-column);
+  --career-section-padding: clamp(var(--ref-space-x14), 7vw, var(--ref-space-x24));
+  --career-heading-space: clamp(var(--ref-space-x10), 5vw, var(--ref-space-x18));
+  --career-route-gap: clamp(var(--ref-space-x4), 2.2vw, var(--ref-space-x7));
+  --career-color-light: var(--ref-color-blue-100);
+  --career-color-mid: var(--ref-color-blue-600);
+  --career-color-mid-soft: rgb(82 113 132 / 18%);
+  --career-color-strong: var(--ref-color-blue-800);
+
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  padding: clamp(3.5rem, 7vw, 6.5rem) max(20px, calc((100vw - var(--content-max)) / 2 + 20px));
-  border-top: 1px solid var(--color-text);
-  border-bottom: 1px solid var(--color-text);
-  background: var(--color-soft);
+  padding: var(--career-section-padding)
+    max(
+      var(--spacing-page-inline),
+      calc((100vw - var(--layout-content-max)) / 2)
+    );
+  border-top: 1px solid var(--color-stroke-contrast);
+  border-bottom: 1px solid var(--color-stroke-contrast);
+  background: var(--ref-color-blue-50);
+}
+
+.career-section + .section {
+  border-top: 0;
 }
 
 .career-section__heading {
   display: grid;
-  grid-template-columns: minmax(170px, 0.38fr) 1fr;
-  gap: clamp(2rem, 6vw, 6rem);
-  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(10.625rem, 0.38fr) 1fr;
+  gap: var(--career-column-gap);
+  margin-bottom: var(--career-heading-space);
 }
 
 .career-section__heading h2 {
   margin: 0;
-  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  font-size: clamp(3.75rem, 5vw, 4rem);
+  line-height: var(--type-display-leading);
   letter-spacing: -0.055em;
 }
 
 .career-map__intro {
   display: grid;
-  grid-template-columns: minmax(170px, 0.38fr) minmax(0, 1fr);
-  gap: clamp(2rem, 6vw, 6rem);
+  grid-template-columns: minmax(10.625rem, 0.38fr) minmax(0, 1fr);
+  gap: var(--career-column-gap);
   align-items: end;
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--ref-space-x10);
 }
 
 .career-map__summary {
-  max-width: 760px;
+  max-width: 47.5rem;
   margin: 0;
-  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  font-size: clamp(var(--ref-font-size-t6), 2.2vw, var(--ref-font-size-t10));
   line-height: 1.55;
   letter-spacing: -0.02em;
+  word-break: keep-all;
 }
 
 .career-map__route {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1rem, 2.2vw, 1.8rem);
+  gap: var(--career-route-gap);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -53,11 +72,11 @@
 .career-map__route::before {
   content: '';
   position: absolute;
-  top: 2.15rem;
+  top: 2.125rem;
   left: 4.8%;
   right: 4.8%;
   height: 2px;
-  background: var(--color-text);
+  background: var(--career-color-mid);
 }
 
 .career-map__stop {
@@ -70,39 +89,42 @@
   z-index: 2;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  min-height: 4.3rem;
+  gap: var(--ref-space-x2-5);
+  min-height: 4.25rem;
 }
 
 .career-map__station-number {
   display: grid;
   place-items: center;
-  width: 2.1rem;
-  height: 2.1rem;
-  border: 1px solid var(--color-text);
-  border-radius: 50%;
-  background: var(--color-bg);
-  font-size: 0.7rem;
-  font-weight: 700;
+  width: 2.125rem;
+  height: 2.125rem;
+  border: 1px solid var(--career-color-mid);
+  border-radius: var(--radius-round);
+  background: var(--color-bg-surface);
+  color: var(--career-color-strong);
+  font-size: var(--ref-font-size-t1);
+  font-weight: var(--ref-font-weight-bold);
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0.08em;
 }
 
 .career-map__station-dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: var(--color-text);
+  width: var(--ref-space-x2-5);
+  height: var(--ref-space-x2-5);
+  border-radius: var(--radius-round);
+  background: var(--career-color-mid);
 }
 
 .career-map__visual {
   position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: clamp(150px, 17vw, 220px);
-  margin-bottom: 1.3rem;
+  min-height: clamp(9.375rem, 17vw, 13.75rem);
+  margin-bottom: var(--ref-space-x5);
   overflow: hidden;
-  border: 1px solid var(--color-text);
-  background: var(--color-bg);
+  border: 1px solid var(--career-color-mid);
+  background: var(--career-color-light);
+  color: var(--career-color-strong);
 }
 
 .career-map__visual::before,
@@ -118,8 +140,8 @@
     135deg,
     transparent 0,
     transparent 13px,
-    rgba(23, 23, 23, 0.08) 13px,
-    rgba(23, 23, 23, 0.08) 14px
+    var(--career-color-mid-soft) 13px,
+    var(--career-color-mid-soft) 14px
   );
 }
 
@@ -129,67 +151,73 @@
   top: 12%;
   right: 10%;
   border: 1px solid currentColor;
-  border-radius: 50%;
+  border-radius: var(--radius-round);
 }
 
 .career-map__stop:nth-child(2) .career-map__visual {
-  background: var(--color-text);
-  color: var(--color-bg);
+  background: var(--career-color-strong);
+  color: var(--color-fg-inverted);
 }
 
 .career-map__stop:nth-child(2) .career-map__visual::before {
   background: linear-gradient(
     90deg,
     transparent 0 48%,
-    rgba(255, 255, 255, 0.22) 48% 52%,
+    rgb(255 255 255 / 22%) 48% 52%,
     transparent 52% 100%
   );
 }
 
 .career-map__stop:nth-child(2) .career-map__visual::after {
-  border-color: rgba(255, 255, 255, 0.7);
+  border-color: rgb(255 255 255 / 70%);
   border-radius: 0;
   transform: rotate(22deg);
 }
 
 .career-map__stop:nth-child(3) .career-map__visual::before {
   background:
-    linear-gradient(var(--color-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
-  background-size: 24px 24px;
+    linear-gradient(var(--career-color-mid-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--career-color-mid-soft) 1px, transparent 1px);
+  background-size: var(--ref-space-x6) var(--ref-space-x6);
 }
 
 .career-map__visual > span {
   position: relative;
   z-index: 2;
   display: block;
-  padding: 1rem 1.1rem;
-  font-size: clamp(1.8rem, 4vw, 3.3rem);
-  font-weight: 750;
+  padding: var(--ref-space-x4) var(--ref-space-x4-5);
+  font-size: clamp(var(--ref-font-size-t11), 4vw, 3.25rem);
+  font-weight: var(--ref-font-weight-bold);
   line-height: 0.95;
   letter-spacing: -0.07em;
 }
 
 .career-map__time {
-  margin-bottom: 0.45rem;
-  color: var(--color-muted);
-  font-size: 0.83rem;
+  margin-bottom: var(--spacing-between-text);
+  color: var(--career-color-mid);
+  font-size: var(--type-meta-size);
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
 }
 
 .career-map__content h3 {
-  margin-bottom: 0.45rem;
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  margin-bottom: var(--spacing-between-text);
+  font-size: clamp(var(--ref-font-size-t6), 2vw, var(--ref-font-size-t9));
 }
 
 .career-map__content p {
   max-width: 32rem;
-  margin-bottom: 0.6rem;
-  color: var(--color-muted);
+  margin-bottom: var(--spacing-between-text);
+  color: var(--color-fg-muted);
 }
 
 .career-map__organization {
-  font-size: 0.9rem;
+  font-size: var(--type-label-size);
+}
+
+.career-map__content a {
+  color: var(--color-fg-accent-strong);
+  text-decoration-line: underline;
 }
 
 .work-story-section,
@@ -203,81 +231,87 @@
 .work-principles-section::before {
   content: '';
   position: absolute;
-  top: 3rem;
+  top: var(--ref-space-x12);
   left: 0;
-  width: 2.4rem;
+  width: var(--ref-space-x10);
   height: 1px;
-  background: var(--color-text);
+  background: var(--color-stroke-accent);
 }
 
 .work-story-section .section-heading,
 .work-index-section .section-heading,
 .work-principles-section .section-heading {
-  padding-top: 0.8rem;
+  padding-top: var(--ref-space-x3);
 }
 
-.work-traces a {
+.work-list.work-traces a {
   display: grid;
-  grid-template-columns: 56px minmax(0, 1fr) 34px;
+  grid-template-columns: var(--ref-space-x14) minmax(0, 1fr) 2.125rem;
   align-items: start;
-  gap: 1rem;
-  padding: 1.6rem 0;
+  gap: var(--ref-space-x4);
+  padding: var(--spacing-list-row);
 }
 
 .work-list__number {
-  color: var(--color-muted);
-  font-size: 0.78rem;
+  color: var(--color-fg-accent);
+  font-size: var(--type-meta-size);
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0.08em;
 }
 
 .work-list__content strong {
-  font-size: 1.04rem;
+  font-size: var(--ref-font-size-t6);
 }
 
 .work-list__arrow {
   justify-self: end;
-  font-size: 1.15rem;
+  color: var(--color-fg-accent-strong);
+  font-size: var(--type-item-title-size);
+  transition: transform var(--motion-interactive);
 }
 
-.work-principles {
+.prose.work-principles {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
+  gap: 0;
   max-width: none;
 }
 
 .work-principles p {
-  min-height: 170px;
+  min-height: 10.625rem;
   margin: 0;
-  padding: 1.5rem;
-  border: 1px solid var(--color-border);
-  background: var(--color-soft);
+  padding-right: var(--ref-space-x8);
+}
+
+.work-principles p + p {
+  padding-right: 0;
+  padding-left: var(--ref-space-x8);
+  border-left: 1px solid var(--color-stroke-subtle);
 }
 
 .work-principles strong {
   display: inline-block;
-  margin-bottom: 0.65rem;
-  font-size: clamp(1.18rem, 2vw, 1.5rem);
-  letter-spacing: -0.035em;
+  margin-bottom: var(--ref-space-x2-5);
+  font-size: clamp(var(--ref-font-size-t6), 2vw, var(--ref-font-size-t8));
+  line-height: var(--type-title-leading);
+  letter-spacing: var(--type-title-tracking);
+  word-break: keep-all;
 }
 
 @media (max-width: 760px) {
   .career-section {
-    padding-block: 3.2rem;
+    --career-section-padding: var(--ref-space-x13);
+    --career-column-gap: var(--ref-space-x3);
+    --career-heading-space: var(--ref-space-x9);
   }
 
   .career-section__heading,
   .career-map__intro {
     grid-template-columns: 1fr;
-    gap: 0.8rem;
-  }
-
-  .career-section__heading {
-    margin-bottom: 2.3rem;
   }
 
   .career-section__heading h2 {
-    font-size: clamp(2.35rem, 13vw, 3.8rem);
+    font-size: clamp(2.375rem, 13vw, 3.75rem);
   }
 
   .career-map__route {
@@ -286,9 +320,9 @@
   }
 
   .career-map__route::before {
-    top: 1rem;
-    bottom: 1rem;
-    left: 1rem;
+    top: var(--ref-space-x4);
+    bottom: var(--ref-space-x4);
+    left: var(--ref-space-x4);
     right: auto;
     width: 2px;
     height: auto;
@@ -296,9 +330,9 @@
 
   .career-map__stop {
     display: grid;
-    grid-template-columns: 2.15rem minmax(0, 1fr);
-    column-gap: 1rem;
-    padding-bottom: 2.3rem;
+    grid-template-columns: 2.125rem minmax(0, 1fr);
+    column-gap: var(--ref-space-x4);
+    padding-bottom: var(--ref-space-x9);
   }
 
   .career-map__station {
@@ -312,8 +346,8 @@
   .career-map__station-number {
     position: relative;
     z-index: 2;
-    width: 2rem;
-    height: 2rem;
+    width: var(--ref-space-x8);
+    height: var(--ref-space-x8);
   }
 
   .career-map__station-dot {
@@ -322,12 +356,12 @@
 
   .career-map__visual {
     grid-column: 2;
-    min-height: 150px;
-    margin-bottom: 1rem;
+    min-height: 9.375rem;
+    margin-bottom: var(--ref-space-x4);
   }
 
   .career-map__visual > span {
-    font-size: clamp(2rem, 12vw, 3rem);
+    font-size: clamp(var(--ref-font-size-t12), 12vw, var(--ref-font-size-t14));
   }
 
   .career-map__content {
@@ -337,20 +371,29 @@
   .work-story-section::before,
   .work-index-section::before,
   .work-principles-section::before {
-    top: 2rem;
+    top: var(--ref-space-x8);
   }
 
-  .work-traces a {
-    grid-template-columns: 42px minmax(0, 1fr) 24px;
-    gap: 0.8rem;
+  .work-list.work-traces a {
+    grid-template-columns: 2.625rem minmax(0, 1fr) var(--ref-space-x6);
+    gap: var(--ref-space-x3);
   }
 
-  .work-principles {
+  .prose.work-principles {
     grid-template-columns: 1fr;
-    gap: 1rem;
   }
 
   .work-principles p {
     min-height: 0;
+    padding-right: 0;
+    padding-bottom: var(--ref-space-x6);
+  }
+
+  .work-principles p + p {
+    padding-top: var(--ref-space-x6);
+    padding-bottom: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--color-stroke-subtle);
+    border-left: 0;
   }
 }

@@ -9,7 +9,7 @@ export const GET: APIRoute = async (context) => {
 
   return rss({
     title: '이병관 — Writing',
-    description: '게임과 일, 시스템, 개인 프로젝트와 삶에서 생긴 질문과 생각을 기록합니다.',
+    description: '게임과 일, AI, 만드는 것, 생활과 육아에 관해 씁니다.',
     site: context.site ?? new URL('https://personalpage.example'),
     customData: '<language>ko</language>',
     items: entries.map((entry) => ({

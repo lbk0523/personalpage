@@ -1,7 +1,15 @@
 # Personal Page — Local Codex Handoff
 
 Status: ACTIVE HANDOFF  
-Updated: 2026-08-23 KST
+Updated: 2026-08-24 KST
+
+Latest implementation update:
+
+- 전체 한국어 copy pass와 browser QA를 완료했다.
+- 사용자 피드백에 따라 SEED Design을 참고한 local design foundation을 구현했다.
+- `docs/05_DESIGN_FOUNDATION.md`와 `src/styles/tokens.css`가 foundation의 현재 기준이다.
+- 사용자 검토를 거쳐 warm editorial, square grouped surface, muted ink blue, self-hosted Wanted Sans 방향을 확정하고 구현했다.
+- 현재 남은 공개 전 관문은 fixture 콘텐츠, canonical URL, 최종 production 승인이다.
 
 ## 1. Purpose
 
@@ -58,7 +66,8 @@ https://github.com/lbk0523/personalpage/pull/1
 5. `docs/02_WIREFRAME.md`
 6. `docs/03_BUILD_SPEC.md`
 7. `docs/DECISIONS.md`
-8. `docs/04_LOCAL_CODEX_HANDOFF.md` — 본 문서
+8. `docs/05_DESIGN_FOUNDATION.md`
+9. `docs/04_LOCAL_CODEX_HANDOFF.md` — 본 문서
 
 문서 사이에 표현 차이가 있을 경우 **더 나중에 승인된 결정 / Wireframe / Build Spec / 본 핸드오프의 현재 상태 정보**를 우선한다.
 
@@ -217,10 +226,15 @@ v1에서 사용하지 않는다:
 - skip link
 - keyboard focus baseline
 - semantic HTML baseline
+- SEED-inspired local design tokens
+- semantic typography / spacing / surface / stroke / radius / state roles
+- self-hosted Wanted Sans Variable
+- warm neutral canvas + muted ink blue accent
+- desktop grouped paper surfaces + mobile full-width flat surfaces
 
 ### Verification already achieved
 
-GitHub Actions Node 24 환경에서 반복 검증 완료:
+로컬 Node 24.19.0 / npm 11.17.0 환경에서 검증 완료:
 
 ```text
 npm ci        PASS
@@ -228,16 +242,14 @@ npm run check PASS
 npm run build PASS
 ```
 
-브라우저 screenshot QA도 다음 폭에서 수행했다.
+브라우저 screenshot/DOM QA도 다음 화면과 폭에서 수행했다.
 
 ```text
-320
-390
-1280
-1440
+Home / Work / Writing / Writing Detail / Now / About
+× 320 / 390 / 1280 / 1440
 ```
 
-Home / Work / Writing / Writing Detail의 주요 responsive flow가 정상 동작하는 것을 확인했다.
+760 / 761px 경계도 별도로 확인했다. 주요 responsive flow, 가로 overflow, nav clipping, self-hosted font load, focus, reduced motion이 정상 동작하고 browser console/page/request error가 없음을 확인했다.
 
 ---
 
@@ -247,7 +259,7 @@ Home / Work / Writing / Writing Detail의 주요 responsive flow가 정상 동�
 
 > 각종 메뉴 및 내용에 대한 한국어 표현들이 전반적으로 너무 딱딱하거나 AI 어투가 많다.
 
-따라서 사용자-facing 한국어는 구현 완성 전에 계속 품질 관리한다.
+새 카피를 추가하거나 fixture를 실제 콘텐츠로 바꿀 때도 이 기준을 계속 적용한다.
 
 ### Copy principles
 
@@ -358,74 +370,15 @@ production 배포 전 해야 할 일:
 
 ## 11. Immediate Next Work for Local Codex
 
-현재 가장 자연스러운 작업 순서:
+### A. Keep the approved visual direction
 
-### A. Environment / repo verification
+`docs/05_DESIGN_FOUNDATION.md`와 D-015를 현재 디자인 기준으로 사용한다. 구조나 기능을 넓히지 않고 실제 콘텐츠가 들어올 때 필요한 작은 조정만 한다.
 
-```bash
-git fetch origin
-git switch implementation/astro-v1
-git pull --ff-only origin implementation/astro-v1
-node --version
-npm --version
-npm ci
-npm run check
-npm run build
-```
+### B. Content and publication gate
 
-Node major는 24여야 한다.
+fixture Work/Writing을 실제 콘텐츠로 교체할지 사용자와 결정한다. 사용자 사실이나 원고는 임의로 만들지 않는다.
 
-### B. Read current implementation
-
-우선 다음을 실제로 읽는다.
-
-```text
-src/pages/index.astro
-src/pages/work/index.astro
-src/components/CareerTimeline.astro
-src/styles/work.css
-src/pages/writing/index.astro
-src/pages/now.astro
-src/pages/about.astro
-src/data/profile.ts
-src/data/career.ts
-src/content.config.ts
-```
-
-### C. Korean copy pass
-
-현재 노출되는 모든 사용자-facing 문자열을 검색하고, 위 Copy principles 기준으로 다시 검토한다.
-
-단:
-
-- 구조 변경 금지
-- 새로운 기능 추가 금지
-- 사용자 사실을 임의로 추가 금지
-- sample content를 실제 사실처럼 꾸미지 않음
-
-### D. Browser QA
-
-최소:
-
-```text
-320px
-390px
-1280px
-1440px
-```
-
-검토 대상:
-
-- horizontal overflow
-- nav wrapping
-- Home directory
-- Work Career Map
-- Writing list
-- Writing Detail reading width
-- focus state
-- 한국어 line wrapping
-
-### E. Report to user before destructive/public actions
+### C. Report to user before destructive/public actions
 
 아래는 사용자 승인 없이 하지 않는다.
 
@@ -444,12 +397,12 @@ Build Spec의 Implementation DoD:
 
 > 승인된 핵심 화면이 desktop/mobile에서 안정적으로 렌더링되고, Markdown으로 Work/Writing을 게시할 수 있으며, production build와 기본 SEO/accessibility가 동작한다.
 
-현재 기술적으로는 이 기준에 매우 근접하거나 충족한 상태다.
+현재 기술적으로는 이 기준을 충족한다. 아래 항목은 구현 DoD와 별개인 publication gate다.
 
 남은 핵심은:
 
-- 사용자-facing 한국어 품질 확정
 - 실제 공개 콘텐츠 / fixture 처리 결정
+- 실제 canonical URL 확정
 - production publication gate
 
 추가 기능을 구현하여 Implementation을 불필요하게 연장하지 않는다.
@@ -487,9 +440,10 @@ Build Spec의 Implementation DoD:
 1. 현재 작업은 `implementation/astro-v1`에서 이어간다.
 2. 제품 전략/IA/Wireframe/Build Spec은 이미 승인됐다.
 3. Work visual direction도 현재 수준으로 유지한다.
-4. 가장 중요한 남은 refinement는 한국어 copy다.
+4. 한국어 copy pass와 승인된 foundation/design edge 구현이 완료됐다.
 5. fixture 콘텐츠 공개 여부는 미결정이다.
-6. 기술 build는 이미 통과했다.
+6. 로컬 Node 24 검증과 핵심 화면 browser QA는 통과했다.
 7. production merge/deploy는 사용자 승인 관문이다.
+8. SEED는 구조와 원칙을 참고할 뿐이며, 당근 브랜드나 React 컴포넌트를 복제하지 않는다.
 
 이 문서를 읽은 뒤 기존 결정을 다시 처음부터 재논의하지 말고, 현재 단계에서 필요한 검증/수정/배포 준비로 바로 이어간다.
