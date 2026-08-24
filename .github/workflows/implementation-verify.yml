@@ -1,0 +1,99 @@
+name: Implementation Verify
+
+on:
+  push:
+    branches:
+      - implementation/astro-v1
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Astro check
+        run: npm run check
+      - name: Production build
+        run: npm run build
+      - name: Upload static build for visual QA
+        uses: actions/upload-artifact@v4
+        with:
+          name: personalpage-dist
+          path: dist
+          if-no-files-found: error
+          retention-days: 3
+      - name: Install Korean font for screenshots
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+          fc-cache -f
+      - name: Render browser QA screenshots
+        run: |
+          mkdir -p qa/screenshots
+          npm run preview -- --host 127.0.0.1 --port 4321 >/tmp/personalpage-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT
+
+          READY=0
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4321/ >/dev/null; then
+              READY=1
+              break
+            fi
+            sleep 1
+          done
+          if [ "$READY" -ne 1 ]; then
+            cat /tmp/personalpage-preview.log
+            exit 1
+          fi
+
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$BROWSER" ]; then
+            echo "No Chromium-compatible browser found on runner"
+            exit 1
+          fi
+
+          shot() {
+            PATHNAME="$1"
+            WIDTH="$2"
+            HEIGHT="$3"
+            OUTPUT="$4"
+            "$BROWSER" \
+              --headless \
+              --no-sandbox \
+              --disable-gpu \
+              --disable-dev-shm-usage \
+              --hide-scrollbars \
+              --window-size="${WIDTH},${HEIGHT}" \
+              --screenshot="qa/screenshots/${OUTPUT}.png" \
+              "http://127.0.0.1:4321${PATHNAME}"
+          }
+
+          shot / 320 2300 home-320
+          shot /work 320 3900 work-320
+          shot / 390 2200 home-390
+          shot /work 390 3600 work-390
+          shot /writing 390 2000 writing-390
+          shot /writing/weekend-after-becoming-a-dad 390 2800 writing-detail-390
+          shot / 1280 1800 home-1280
+          shot /work 1280 2600 work-1280
+          shot / 1440 1800 home-1440
+          shot /work 1440 2600 work-1440
+      - name: Upload browser QA screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: personalpage-qa-screenshots
+          path: qa/screenshots
+          if-no-files-found: error
+          retention-days: 3

@@ -1,0 +1,21 @@
+---
+import { navigation } from '../data/navigation';
+import { profile } from '../data/profile';
+
+const { pathname } = Astro.url;
+const isCurrent = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+---
+<header class="site-header">
+  <div class="site-shell site-header__inner">
+    <a class="site-name" href="/">{profile.name}</a>
+    <nav class="site-nav" aria-label="주요 메뉴">
+      {
+        navigation.map((item) => (
+          <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

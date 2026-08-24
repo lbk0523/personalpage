@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WritingList from '../../components/WritingList.astro';
+
+const entries = (await getCollection('writing', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
+---
+<BaseLayout title="Writing" description="게임과 일, AI, 만드는 것, 생활과 육아에 관해 씁니다.">
+  <section class="page-intro">
+    <p class="eyebrow">Writing</p>
+    <h1>생각이 남을 때 씁니다.</h1>
+    <p class="lead">게임과 일, AI, 만드는 것, 생활과 육아까지. 자꾸 떠오르는 질문이나 아직 정리되지 않은 생각도 씁니다.</p>
+  </section>
+  <WritingList entries={entries} />
+</BaseLayout>

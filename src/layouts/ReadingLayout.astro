@@ -1,0 +1,32 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ContentMeta from '../components/ContentMeta.astro';
+
+type Props = {
+  title: string;
+  description: string;
+  date?: Date;
+  type?: string;
+  series?: string;
+  period?: string;
+  role?: string;
+  backHref: string;
+  backLabel: string;
+};
+
+const props = Astro.props;
+---
+<BaseLayout title={props.title} description={props.description} type="article" publishedAt={props.date}>
+  <article class="reading">
+    <header class="reading__header">
+      <h1>{props.title}</h1>
+      <ContentMeta date={props.date} type={props.type} series={props.series} period={props.period} role={props.role} />
+    </header>
+    <div class="prose">
+      <slot />
+    </div>
+    <footer class="reading__footer">
+      <a href={props.backHref}>← {props.backLabel}</a>
+    </footer>
+  </article>
+</BaseLayout>

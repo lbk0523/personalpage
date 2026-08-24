@@ -239,3 +239,54 @@ Work의 `걸어온 길` Career Timeline은 Wireframe에서 확정한 정보 구�
 ### Reason
 
 모바일 Wireframe 검토에서 Work의 전체 구조에는 이견이 없었지만 `걸어온 길` 영역이 다른 페이지에 비해 지나치게 딱딱하게 느껴진다는 피드백이 있었다. 구조를 다시 설계할 문제는 아니며, 이후 실제 웹디자인에서 시각적 표현을 보완하는 것이 적절하다.
+
+---
+
+## D-014 — 2026-08-23 — SEED 기반 foundation을 먼저 정리한 뒤 고유한 디자인 엣지를 탐색
+
+### Decision
+
+사이트의 평면적인 인상을 개별 장식으로 보완하기 전에, 당근이 공개한 SEED Design의 foundation 원칙을 참고해 색상 역할, 타이포그래피 위계, 간격, surface, stroke, radius, state를 먼저 시스템화한다.
+
+SEED 패키지나 React 컴포넌트는 설치하지 않는다. 당근 브랜드 색상과 제품 UI를 복제하지 않고 Astro + plain CSS 안에서 프로젝트 소유의 로컬 디자인 토큰으로 재해석한다.
+
+Foundation의 responsive 및 visual QA가 끝난 뒤에만 개인 accent, signature graphic, surface 질감처럼 이 사이트만의 디자인 엣지를 별도 후보로 비교한다.
+
+### Constraints
+
+- 승인된 IA, Wireframe, 정보 위계, 콘텐츠 순서를 바꾸지 않는다.
+- Work Career Map의 현재 visual direction을 전면 재설계하지 않는다.
+- 모든 섹션을 카드화하거나 그림자를 장식처럼 반복하지 않는다.
+- Foundation 단계에서 신규 프레임워크나 UI dependency를 추가하지 않는다.
+
+### Reason
+
+현재의 평면적인 인상은 장식 부족보다 여러 화면이 같은 배경, 같은 선, 제각각인 간격을 공유하는 데서 온다. 공통 문법을 먼저 만들면 시각 위계를 일관되게 보완할 수 있고, 이후 고유한 표현을 추가해도 일회성 스타일이 아니라 유지 가능한 시스템 안에서 운영할 수 있다.
+
+---
+
+## D-015 — 2026-08-24 — 따뜻한 editorial 방향과 절제된 ink blue를 디자인 엣지로 사용
+
+### Decision
+
+SEED에서 참고한 토큰 구조 위에 다음 시각 방향을 적용한다.
+
+- warm neutral canvas와 종이에 가까운 밝은 surface
+- 한글과 영문에 self-hosted `Wanted Sans Variable` 한 family
+- Home 이름과 Work 대표 제목만 크게 쓰는 display hierarchy
+- 큰 표면은 0–2px radius, 원형은 Career Map station처럼 의미가 있는 도형에만 허용
+- 데스크톱 목록/index는 개별 카드가 아닌 하나의 grouped paper surface
+- 모바일 grouped surface는 viewport 폭으로 펴고 shadow 제거
+- 큰 섹션은 dark ink line, 내부 항목은 pale hairline
+- muted ink blue를 링크, active state, index marker, Work의 3단계 blue graphic에 사용
+- active nav는 weight + thin underline, body link는 underline
+- hover/focus는 120–160ms 색 변화와 최대 2px arrow movement
+- grain, texture, 장식적인 둥근 카드, 과한 elevation은 사용하지 않음
+
+Work의 Career Map 구조와 visual grammar는 유지하며 blue scale만 정돈한다. Career Map의 route 문법을 다른 페이지의 장식으로 확장하지 않는다.
+
+### Reason
+
+사용자는 전체 페이지가 한 font family를 유지하는 편이 안정적이라고 판단했고, AI 제작물에서 자주 보이는 과도한 곡률과 카드화를 피하고 싶다고 명확히 밝혔다. 따뜻한 editorial 바탕은 개인 홈페이지의 읽기 성격을 살리고, 절제된 blue는 사용자가 선호하는 색이면서 링크와 상태의 신뢰감 있는 기준점이 된다.
+
+이 결정은 정보 구조나 기능 범위를 바꾸지 않고, foundation 안에서 위계와 간격, 표면의 깊이를 일관되게 만드는 refinement다.

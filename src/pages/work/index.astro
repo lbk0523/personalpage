@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CareerTimeline from '../../components/CareerTimeline.astro';
+import '../../styles/work.css';
+
+const works = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999),
+);
+const principlesIndex = works.length > 0 ? '04' : '03';
+---
+<BaseLayout title="Work" description="게임 업계에서 해온 일과 맡아온 역할.">
+  <section class="page-intro work-intro">
+    <p class="eyebrow">Work</p>
+    <h1>일해온 길</h1>
+    <p class="lead">지금은 게임 사업 PM으로 일합니다. 콘텐츠 기획을 거쳐 이제는 제품과 사업을 함께 봅니다.</p>
+  </section>
+
+  <section class="career-section" aria-labelledby="career-title">
+    <div class="career-section__heading">
+      <p class="eyebrow">01 / Career</p>
+      <h2 id="career-title">맡아온 역할</h2>
+    </div>
+    <CareerTimeline />
+  </section>
+
+  <section class="section narrative-section work-story-section">
+    <div class="section-heading">
+      <p class="eyebrow">02 / Story</p>
+      <h2>어쩌다 여기까지 왔나</h2>
+    </div>
+    <div class="prose prose--compact">
+      <p>처음부터 사업 PM이 되려던 건 아니었습니다. 게임을 더 잘 만드는 데 관심이 있어 콘텐츠를 기획했고, 어느 순간부터 개별 콘텐츠보다 제품 전체의 방향이 더 궁금해졌습니다.</p>
+      <p>기획과 사업을 오가며 숫자나 기능 하나만 봐서는 답을 내리기 어렵다는 걸 배웠습니다. 제품과 사용자, 조직과 시장을 함께 보고 무엇부터 할지 고르는 일이 결국 제 역할에 가까웠습니다.</p>
+    </div>
+  </section>
+
+  {works.length > 0 && (
+    <section class="section work-index-section">
+      <div class="section-heading">
+        <p class="eyebrow">03 / Work</p>
+        <h2>해본 것들</h2>
+      </div>
+      <ul class="work-list work-traces">
+        {works.map((entry, index) => (
+          <li>
+            <a href={`/work/${entry.id}/`}>
+              <span class="work-list__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <span class="work-list__content">
+                <strong>{entry.data.title}</strong>
+                <small>{entry.data.summary}</small>
+              </span>
+              <span class="work-list__arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="section narrative-section work-principles-section">
+    <div class="section-heading">
+      <p class="eyebrow">{principlesIndex} / Principles</p>
+      <h2>일하면서 생긴 기준</h2>
+    </div>
+    <div class="prose prose--compact work-principles">
+      <p><strong>방향부터 맞춘다.</strong><br />같은 노력을 해도 방향이 맞으면 결과가 달랐습니다.</p>
+      <p><strong>복잡함을 너무 빨리 지우지 않는다.</strong><br />문제가 복잡한 데는 대개 이유가 있었습니다. 여러 관점과 제약을 먼저 살핀 뒤, 실행할 수 있는 선택지로 좁힙니다.</p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+type Props = {
+  date?: Date;
+  type?: string;
+  series?: string;
+  period?: string;
+  role?: string;
+};
+
+const { date, type, series, period, role } = Astro.props;
+const parts = [
+  date?.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' }),
+  series,
+  type === 'essay' ? '글' : type === 'note' ? '노트' : undefined,
+  period,
+  role,
+].filter(Boolean);
+---
+{parts.length > 0 && <p class="content-meta">{parts.join(' · ')}</p>}

@@ -1,5 +1,12 @@
 # Agent Instructions
 
+## Workspace Policy Inheritance
+
+This repository inherits `/Users/byung/agent-workspace/AGENTS.md` and
+`/Users/byung/agent-workspace/policies/codex-rules.md`. Follow the stricter
+applicable rule. Do not push, merge, deploy, publish private material, or widen
+the approved product scope without the required human approval.
+
 ## Project Goal
 
 이 저장소는 이병관의 개인 웹사이트를 설계·구현·운영하기 위한 정본 저장소다.
@@ -9,11 +16,12 @@
 
 작업을 시작하기 전에 아래 순서로 읽는다.
 
-1. `README.md`
-2. `AGENTS.md`
-3. `docs/00_STRATEGY.md`
-4. 현재 작업 단계의 승인 문서
-5. 필요 시 `docs/DECISIONS.md`
+1. workspace `AGENTS.md`와 `policies/codex-rules.md`
+2. repo `AGENTS.md`
+3. `README.md`
+4. `docs/00_STRATEGY.md`
+5. 현재 작업 단계의 승인 문서
+6. 필요 시 `docs/DECISIONS.md`
 
 ## Source of Truth
 
