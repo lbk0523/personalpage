@@ -313,3 +313,48 @@ Production 운영 범위는 다음과 같다.
 ### Reason
 
 사이트 구현과 배포 환경을 먼저 마련한 뒤 실제 콘텐츠를 축적한다는 D-003의 실행 순서를 따르면서도, fixture를 실제 개인 원고처럼 공개하지 않기 위함이다. production URL과 Git 연동을 먼저 안정화하면 이후 Content 단계에서 승인된 원고를 저장소에 반영하는 것만으로 일관된 배포 절차를 사용할 수 있다.
+
+---
+
+## D-017 — 2026-08-25 — 사이트를 Writing 중심의 공개 정본으로 전환
+
+### Decision
+
+사이트의 초기 공개 정체성을 개인 종합 홈페이지에서 **이병관이 쓴 공개 글의 정본이자 아카이브**로 변경한다.
+
+초기 공개 화면은 다음으로 제한한다.
+
+```text
+Home / Writing Archive
+Writing Detail
+RSS
+404
+```
+
+Work, Work Detail, Now, 별도 About은 public route에서 제외한다. 관련 원고와 구현 이력은 삭제 대상으로 간주하지 않으며, 실제 필요가 확인될 때 별도 전략·IA 변경을 거쳐 재검토한다.
+
+웹사이트와 외부 채널의 역할은 다음처럼 분리한다.
+
+```text
+Private Draft
+  → Public Canonical Writing on Website
+  → Distribution and Conversation on External Channels
+```
+
+웹사이트는 원문, 독립된 공개 주소, 장기 축적과 이식성을 담당한다. X 등 외부 채널은 글을 발견하게 하고 반응을 주고받는 배포·대화 수단으로 사용할 수 있지만 글의 유일한 보관 장소로 두지 않는다.
+
+### Reason
+
+장기 보관만 필요하다면 로컬 파일로 충분하고, 즉각적인 배포와 대화만 필요하다면 X 같은 외부 채널만으로도 가능하다. 독립 웹사이트의 근거는 **지속성과 공유성을 함께 제공하는 공개 정본**에 있다.
+
+기존 사이트는 Home에서 Work, Writing, Now, About을 동등한 개인 디렉터리로 보여주고 Work를 첫 진입점으로 두어, 글을 공개하고 축적하려는 출발점보다 포트폴리오 인상을 강하게 만들었다. 글 자체를 첫 경험으로 바꾸어 사이트의 운영 동기와 공개 목적을 일치시킨다.
+
+### Supersedes
+
+- D-008의 `Home Selected Writing 숨김` 결정
+- D-010의 `Personal Directory + Light Stream` Home 구조
+- D-011의 Work public page 방향
+- D-013의 Work Career Timeline 공개 디자인 요구
+- D-016의 기존 public route 범위
+
+D-001의 개인 이름 상위 브랜드, D-002의 육아 콘텐츠 Writing 내부 운영, D-014와 D-015의 공통 디자인 foundation은 새 공개 범위 안에서 유지한다.

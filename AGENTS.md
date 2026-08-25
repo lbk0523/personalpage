@@ -9,8 +9,8 @@ the approved product scope without the required human approval.
 
 ## Project Goal
 
-이 저장소는 이병관의 개인 웹사이트를 설계·구현·운영하기 위한 정본 저장소다.
-웹사이트는 이병관이 해온 일과 만든 것, 현재의 관심, 살아가며 발전시키는 생각을 자신의 이름 아래 장기간 축적하고 세상과 공유하기 위한 개인 본진이자 살아 있는 포트폴리오다.
+이 저장소는 이병관의 Writing 중심 개인 웹사이트를 설계·구현·운영하기 위한 정본 저장소다.
+웹사이트는 이병관이 살아가며 오래 붙잡게 되는 생각을 자신의 이름 아래 공개하고, 다른 사람이 지금과 미래에 읽을 수 있도록 장기간 축적하는 공개 정본이자 아카이브다.
 
 ## Required Reading Order
 
@@ -47,9 +47,11 @@ the approved product scope without the required human approval.
 ## Core Product Constraints
 
 - 이 프로젝트의 목적은 웹개발 자체가 아니다.
-- 웹사이트는 개인의 Work / Writing / Now / About을 장기간 축적하는 도구다.
+- 웹사이트의 초기 공개 범위는 Home / Writing Archive, Writing Detail, RSS, 404다.
+- Work / Work Detail / Now / 별도 About은 D-017에 따라 초기 public route에서 제외한다.
 - 사이트의 상위 브랜드는 특정 직무, 육아 브랜드, 개별 프로젝트가 아니라 이병관 개인이다.
-- 현재의 핵심 직업적 정체성은 게임 사업 PM이지만, 장기 사이트 정체성은 한 직책에 고정하지 않는다.
+- 사이트의 첫인상을 현재 직업이나 포트폴리오로 만들지 않는다.
+- 웹사이트는 공개 원문과 장기 축적을 담당하고, X 등 외부 채널은 배포와 대화 수단으로 사용할 수 있다.
 - 육아 콘텐츠는 `Writing` 안의 중요한 연재/주제로 다루며 독립 사이트나 상위 브랜드로 분리하지 않는다.
 
 ## Agent Rules
@@ -88,8 +90,6 @@ http://localhost:8080/design/wireframe/
 우선 모바일 검토 대상:
 
 - Home
-- Work
-- Writing
 - Writing Detail
 
 ## Scope Discipline

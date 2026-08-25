@@ -1,7 +1,7 @@
 # Personal Page — Design Foundation
 
-Status: APPROVED — IMPLEMENTED  
-Updated: 2026-08-24 KST
+Status: APPROVED — REVISED FOR WRITING SITE
+Updated: 2026-08-25 KST
 
 ## 1. Purpose
 
@@ -52,7 +52,7 @@ motion: interactive
 
 ### Component
 
-Career Map처럼 고유한 시각 계약이 있는 영역만 component-level 변수를 둔다. 한 번만 쓰는 수치를 모두 토큰으로 만들지 않는다.
+반복되는 archive row나 reading layout처럼 고유한 시각 계약이 있는 영역만 component-level 변수를 둔다. 한 번만 쓰는 수치를 모두 토큰으로 만들지 않는다.
 
 ## 4. Surface Hierarchy
 
@@ -66,10 +66,8 @@ hover, active, focus는 elevation을 새로 쌓지 않고 색, underline, outlin
 모든 섹션을 카드로 만들거나 모든 표면에 그림자를 넣지 않는다.
 
 - Header: surface + 낮은 구분선, 그림자 없음
-- Home Directory: 데스크톱에서 하나로 묶인 surface + stroke + 매우 낮은 elevation
-- Writing / Now / Work 목록: 데스크톱에서 하나로 묶인 surface + stroke + 매우 낮은 elevation
-- About / Work narrative: canvas 위의 섹션 간 stroke
-- Career Map: 승인된 full-bleed, 선, 패턴, 큰 타이포를 유지
+- Home Writing Archive: 데스크톱에서 하나로 묶인 surface + stroke + 매우 낮은 elevation
+- Writing Detail: canvas 위의 좁은 reading column, 별도 card surface 없음
 
 모바일에서 묶음 surface는 화면 폭에 가깝게 펴고 그림자를 제거한다. 항목 사이의 hairline과 canvas/surface 색 차이만 유지한다.
 
@@ -81,8 +79,8 @@ hover, active, focus는 elevation을 새로 쌓지 않고 색, underline, outlin
 - 임의의 `650`, `750` weight는 사용하지 않고 400 / 500 / 700으로 제한한다.
 - 제목은 `text-wrap: balance`와 `word-break: keep-all`을 사용한다.
 - 페이지 gutter, intro 끝, 섹션 간격, 목록 행 padding은 semantic spacing을 사용한다.
-- Career Map의 패턴 각도와 도형 비율처럼 art direction에만 필요한 수치는 예외로 남길 수 있다.
-- Home 이름과 Work 대표 제목은 display 크기, 일반 페이지와 상세 제목은 한 단계 낮은 크기를 사용한다.
+- art direction에만 필요한 수치는 예외로 남길 수 있다.
+- Home의 writing statement는 page title 크기, 상세 글 제목은 reading title 크기를 사용한다.
 - Intro는 넉넉하게, 목록은 조밀하게, 큰 섹션 전환은 다시 넉넉하게 배치한다.
 
 ## 6. Responsive Contract
@@ -91,16 +89,15 @@ hover, active, focus는 elevation을 새로 쌓지 않고 색, underline, outlin
 
 ```text
 ≤ 760px
-- Header 세로 배치
-- Home Directory 1열
-- Career Map 1열 세로 route
-- Work Principles 1열
+- Header는 이름 한 줄
+- Home Writing row는 날짜와 제목을 세로 배치
 - 묶음 surface는 좌우 그림자 없이 viewport 폭으로 확장
+- Reading은 한 열로 유지
 
 > 760px
-- Home Directory 2열
-- Career Map 3열 가로 route
-- Work Principles 2열
+- Header와 Footer는 content max width에 정렬
+- Home Writing row는 날짜와 제목 두 column
+- Reading은 좁은 max width로 중앙 정렬
 ```
 
 기본 검토 폭은 320 / 390 / 1280 / 1440이다. breakpoint 경계 변경이 필요할 때만 760 전후를 추가 확인한다.
@@ -110,26 +107,25 @@ hover, active, focus는 elevation을 새로 쌓지 않고 색, underline, outlin
 ```text
 src/styles/tokens.css  scale + semantic foundation
 src/styles/global.css  reset + base + shared layout/components
-src/styles/work.css    approved Work-specific visual direction
 ```
+
+`src/styles/work.css`는 D-017 이후 public build에서 사용하지 않는다.
 
 ## 8. Approved Design Edge
 
 사용자 검토로 다음 방향을 확정했다.
 
 - 전체 인상은 따뜻한 editorial과 가벼운 인쇄물 문법에 둔다.
-- canvas는 warm neutral, 링크·상태·Career Map은 신뢰감이 느껴지는 muted ink blue를 사용한다.
+- canvas는 warm neutral, 링크와 상태는 신뢰감이 느껴지는 muted ink blue를 사용한다.
 - 큰 표면의 모서리는 0–2px로 유지한다. 장식적인 둥근 카드는 쓰지 않는다.
-- 원형은 Career Map station처럼 의미가 있는 도형에만 사용한다.
+- 원형 장식은 사용하지 않는다.
 - 목록과 index는 항목별 카드가 아니라 하나의 종이 면과 내부 hairline으로 묶는다.
 - 큰 섹션 구분선은 dark ink, 내부 구분선은 pale neutral로 위계를 나눈다.
-- active nav는 굵기와 얇은 blue underline으로만 표시한다.
-- 본문 링크는 underline을 유지하고, index CTA는 blue text와 arrow를 사용한다.
-- hover와 focus는 120–160ms 색 변화, 화살표는 최대 2px 이동으로 제한한다.
+- 본문과 목록 링크는 underline을 유지한다.
+- hover와 focus는 120–160ms 색 변화로 제한한다.
 - grain이나 texture는 사용하지 않는다.
-- Career Map의 blue scale과 route 문법은 Work 안에서만 사용한다.
 
-이 방향은 기존 DOM, 정보 위계, 콘텐츠 순서, Work Career Narrative를 바꾸지 않는다.
+이 방향은 Writing 중심 IA와 읽기 우선 정보 위계를 시각적으로 지원한다.
 
 ## 9. Official References
 

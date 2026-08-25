@@ -1,19 +1,23 @@
 ---
 type Props = {
   date?: Date;
+  updatedAt?: Date;
   type?: string;
   series?: string;
-  period?: string;
-  role?: string;
 };
 
-const { date, type, series, period, role } = Astro.props;
+const { date, updatedAt, type, series } = Astro.props;
+const dateFormatter = new Intl.DateTimeFormat('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+const showUpdatedAt = date && updatedAt && date.toDateString() !== updatedAt.toDateString();
 const parts = [
-  date?.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' }),
-  series,
+  date ? dateFormatter.format(date) : undefined,
+  showUpdatedAt ? `수정 ${dateFormatter.format(updatedAt)}` : undefined,
   type === 'essay' ? '글' : type === 'note' ? '노트' : undefined,
-  period,
-  role,
+  series,
 ].filter(Boolean);
 ---
 {parts.length > 0 && <p class="content-meta">{parts.join(' · ')}</p>}

@@ -1,459 +1,170 @@
-# Personal Page — Local Codex Handoff
+# Local Codex Handoff — Writing Site Revision
 
-Status: PRODUCTION DEPLOYED — CONTENT NEXT
-Updated: 2026-08-24 KST
+Updated: 2026-08-25 KST
 
-Latest implementation update:
+## 1. Current State
 
-- 전체 한국어 copy pass와 browser QA를 완료했다.
-- 사용자 피드백에 따라 SEED Design을 참고한 local design foundation을 구현했다.
-- `docs/05_DESIGN_FOUNDATION.md`와 `src/styles/tokens.css`가 foundation의 현재 기준이다.
-- 사용자 검토를 거쳐 warm editorial, square grouped surface, muted ink blue, self-hosted Wanted Sans 방향을 확정하고 구현했다.
-- fixture 콘텐츠는 production에서 제외하기로 승인되어 `draft: true`로 전환했다.
-- canonical URL은 `https://byungklee.pages.dev`로 승인됐다.
-- PR #1은 squash merge됐고 `main`의 merge commit은 `3883d07a10935142cbe4a00b4d7ec184a4b92fbc`다.
-- Cloudflare Pages project `byungklee`가 GitHub repository `lbk0523/personalpage`와 연결됐다.
-- Production은 `https://byungklee.pages.dev`에 배포됐고 smoke test를 통과했다.
-- Production branch는 `main`이며 non-production branch의 자동 preview 배포는 비활성화했다.
+사용자가 D-017 Writing 중심 전략을 승인하고 웹페이지 수정 착수를 요청했다.
 
-## 1. Purpose
+완료:
 
-이 문서는 ChatGPT에서 진행하던 `lbk0523/personalpage` 구현 작업을 사용자의 로컬 Codex 환경으로 넘기기 위한 실행용 핸드오프다.
+- Strategy revision 승인
+- IA revision 승인·반영
+- Wireframe revision 승인·반영
+- Build Spec revision 승인·반영
+- Astro public route와 Home 구조 조정
+- responsive browser QA
+- local check/build/route/XML 검증
 
-로컬 Codex는 이 대화 기록을 전제로 하지 말고 **GitHub 저장소의 승인 문서와 현재 production 상태**를 정본으로 사용한다.
+현재 다음 단계는 **실제 공개용 Writing 준비**다.
 
----
+## 2. Approved Product Direction
 
-## 2. Repository / Branch / PR
+사이트의 정체성:
 
-Repository:
+> 이병관이 쓴 공개 글의 정본이자 아카이브
+
+역할 분리:
 
 ```text
-lbk0523/personalpage
+Private Draft
+  → Public Canonical Writing on Website
+  → Distribution and Conversation on External Channels
 ```
 
-Default branch:
-
-```text
-main
-```
-
-현재 production 기준 브랜치:
-
-```text
-main
-```
-
-구현 PR:
-
-```text
-#1 Implement Astro v1 site skeleton — MERGED
-https://github.com/lbk0523/personalpage/pull/1
-```
-
-중요:
-
-- `main`의 `3883d07a10935142cbe4a00b4d7ec184a4b92fbc`가 현재 production source다.
-- 새 구현/문서 수정은 `main`에서 직접 하지 않고 별도 branch와 PR로 진행한다.
-- GitHub App은 `lbk0523/personalpage` 저장소 하나에만 접근하도록 제한했다.
-- 새 production 배포, Cloudflare 설정 변경, custom domain 연결은 사용자의 명시적 승인 없이 실행하지 않는다.
-
----
-
-## 3. Required Reading Order
-
-작업 시작 전 반드시 아래 순서로 읽는다.
-
-1. `README.md`
-2. `AGENTS.md`
-3. `docs/00_STRATEGY.md`
-4. `docs/01_IA.md`
-5. `docs/02_WIREFRAME.md`
-6. `docs/03_BUILD_SPEC.md`
-7. `docs/DECISIONS.md`
-8. `docs/05_DESIGN_FOUNDATION.md`
-9. `docs/04_LOCAL_CODEX_HANDOFF.md` — 본 문서
-
-문서 사이에 표현 차이가 있을 경우 **더 나중에 승인된 결정 / Wireframe / Build Spec / 본 핸드오프의 현재 상태 정보**를 우선한다.
-
-대화 기억이나 추정으로 승인된 구조를 되돌리지 않는다.
-
----
-
-## 4. Project Goal
-
-사이트 목적:
-
-> 이병관이 해온 일과 만든 것, 현재의 관심, 살아가며 발전시키는 생각을 자신의 이름 아래 장기간 축적하고 세상과 공유하는 개인 웹사이트.
-
-사이트는 취업용 포트폴리오 하나로 축소하지 않는다.
-
-상위 정체성:
-
-```text
-이병관
-├─ Work
-├─ Writing
-├─ Now
-└─ About
-```
-
-육아 글 `아빠들의 육아 대화`는 별도 브랜드 사이트가 아니라 Writing 내부의 topic/series다.
-
----
-
-## 5. Approved Product Direction
-
-### Home
-
-`Personal Directory + Light Stream`.
-
-- 커리어 포트폴리오 요약 페이지가 아니다.
-- 이병관이라는 사람의 여러 영역으로 들어가는 첫 관문이다.
-- Selected Work / KPI / 경력 증명 hero를 전면에 두지 않는다.
-
-### Work
-
-`Career Narrative`.
-
-- 프로젝트 카드 갤러리가 주인공이 아니다.
-- 어떤 일을 거쳐 현재 역할에 왔는지가 중심이다.
-- Work Detail은 기계적인 case-study 템플릿이 아니라 긴 Project Story다.
-
-현재 사용자 피드백을 반영해 Work의 Career 영역은 **infographic-style Career Map**으로 구현되어 있다.
-
-현재 허용된 방향:
-
-- 데스크톱: 서비스 운영 → 콘텐츠 기획 → 사업 PM의 역할 변화를 하나의 visual route로 표현
-- 모바일: 같은 정보를 세로 route로 축약
-- full-bleed Career section
-- 선 / 패턴 / 큰 타이포 / 공간 분할을 이용한 시각화
-- 화려한 인포그래픽 자체가 목적은 아님
-
-사용자 최신 평가:
-
-> "그래 우선 이정도로 하자."
-
-따라서 Work visual direction을 다시 전면 재설계하지 않는다. 이후 실제 콘텐츠가 들어갈 때 필요한 작은 refinement만 허용한다.
-
-### Writing
-
-`Quiet Archive`.
-
-Cold Start에서는:
-
-- Featured 없음
-- Topic navigation 없음
-- Series navigation 없음
-- 검색 없음
-- 날짜 + 제목 중심의 단순 목록
-
-Writing Detail은 Reading First.
-
-### Now
-
-현재의 일 / 관심 / 만드는 것 / 삶의 변화를 짧게 보여준다.
-
-### About
-
-Work의 resume 반복이 아니라 사람 자체를 설명한다.
-
----
-
-## 6. Technical Stack — APPROVED
-
-```text
-Astro static output
-TypeScript
-plain CSS
-local Markdown Content Collections
-Node.js 24 LTS
-npm
-Cloudflare Pages target
-```
-
-v1에서 사용하지 않는다:
-
-- React
-- Next.js
-- Tailwind
-- MDX
-- CMS
-- database
-- authentication
-- comments
-- search
-- analytics
-- dark mode
-- heavy animation framework
-
-기본 원칙:
-
-> 상호작용이 필요 없는 페이지에는 client-side JavaScript를 보내지 않는다.
-
----
-
-## 7. Current Implementation State
-
-현재 브랜치에는 다음이 구현되어 있다.
-
-### Routes
+public structure:
 
 ```text
 /
+├─ /writing/[slug]
+├─ /rss.xml
+└─ /404
+```
+
+초기 public route 제외:
+
+```text
+/writing
 /work
 /work/[slug]
-/writing
-/writing/[slug]
 /now
 /about
+```
+
+Work 콘텐츠는 삭제하지 않고 `src/content/work/`에 보존한다.
+
+## 3. Key Implementation Changes
+
+- Home이 Personal Directory에서 Writing Archive로 변경됨
+- Header primary navigation 제거
+- Footer는 짧은 저자 맥락과 RSS만 유지
+- Home Writing list는 날짜 + 제목 중심
+- Writing Detail back link는 `/`의 `글 목록으로`
+- optional `updatedAt` metadata와 article modified meta 지원
+- Work, Now, About, 별도 Writing index page source 제거
+- sitemap과 RSS에는 public Writing만 포함
+- draft fixture는 계속 public output에서 제외
+
+Active product page source:
+
+```text
+src/pages/index.astro
+src/pages/writing/[slug].astro
+src/pages/rss.xml.ts
+src/pages/404.astro
+```
+
+## 4. Verification Completed
+
+자동 검증:
+
+```text
+npm run check    PASS — 0 errors, 0 warnings, 0 hints
+npm run build    PASS
+git diff --check PASS
+xmllint          PASS — RSS and sitemap XML
+```
+
+final build output:
+
+```text
+/index.html
+/404.html
 /rss.xml
-/404
+/sitemap-index.xml
+/sitemap-0.xml
 ```
 
-### Core implementation
+확인한 제외 항목:
 
-- Astro static project scaffold
-- TypeScript
-- shared BaseLayout / ReadingLayout
-- SiteHeader / SiteFooter
-- Markdown content collections
-- Work collection
-- Writing collection
-- Career data
-- responsive CSS
-- Work infographic-style Career Map
-- RSS
-- sitemap
-- basic SEO metadata
-- robots.txt
-- favicon
-- skip link
-- keyboard focus baseline
-- semantic HTML baseline
-- SEED-inspired local design tokens
-- semantic typography / spacing / surface / stroke / radius / state roles
-- self-hosted Wanted Sans Variable
-- warm neutral canvas + muted ink blue accent
-- desktop grouped paper surfaces + mobile full-width flat surfaces
+- `/work`
+- `/now`
+- `/about`
+- `/writing` index
+- draft Writing detail
+- fixture reference in RSS / sitemap
 
-### Verification already achieved
+Browser QA:
 
-로컬 Node 24.19.0 / npm 11.17.0 환경에서 검증 완료:
+- Browser plugin available, Chrome extension path 사용
+- Home과 404의 page identity / DOM / console 확인
+- Writing fixture를 local QA build에서만 임시 표시해 archive와 detail 검증 후 즉시 `draft: true` 복원
+- Home → Writing Detail → 글 목록 interaction 확인
+- 404 → 글 목록 interaction 확인
+- 320 / 390 / 760 / 761 / 1280 / 1440 width 확인
+- 모든 검토 폭에서 horizontal overflow 없음
+- Home / Writing Detail console error·warning 없음
+- final state에서 public Writing count 0 확인
 
-```text
-npm ci        PASS
-npm run check PASS
-npm run build PASS
-```
+Known QA note:
 
-브라우저 screenshot/DOM QA도 다음 화면과 폭에서 수행했다.
+- Chrome extension이 local raw `/rss.xml` navigation을 `ERR_BLOCKED_BY_CLIENT`로 차단했지만 클릭은 정확한 URL로 이동했다.
+- RSS 파일 자체는 build output과 `xmllint`로 정상 검증했다.
+
+## 5. Content State
+
+Writing fixture:
 
 ```text
-Home / Work / Writing / Writing Detail / Now / About
-× 320 / 390 / 1280 / 1440
-```
-
-760 / 761px 경계도 별도로 확인했다. 주요 responsive flow, 가로 overflow, nav clipping, self-hosted font load, focus, reduced motion이 정상 동작하고 browser console/page/request error가 없음을 확인했다.
-
----
-
-## 8. Korean Copy Direction — IMPORTANT
-
-사용자의 최신 전역 피드백:
-
-> 각종 메뉴 및 내용에 대한 한국어 표현들이 전반적으로 너무 딱딱하거나 AI 어투가 많다.
-
-새 카피를 추가하거나 fixture를 실제 콘텐츠로 바꿀 때도 이 기준을 계속 적용한다.
-
-### Copy principles
-
-- 짧게 말한다.
-- 실제 개인 홈페이지 주인이 직접 쓴 말처럼 쓴다.
-- 설명문 / 보고서 / PRD 어투를 피한다.
-- `~을 기록합니다`, `~에 관심이 있습니다`, `~을 중요하게 생각합니다`, `~하고자 합니다`, `~하는 공간입니다` 같은 반복 패턴을 경계한다.
-- 불필요하게 추상적인 명사를 줄이고 구체적인 동사를 쓴다.
-- 제목은 문서 목차보다 사람이 붙인 제목처럼 쓴다.
-- 한국어를 억지로 직역하지 않는다.
-
-현재 적용된 예:
-
-```text
-생각하고 경험한 것을 기록합니다.
-→ 생각이 남을 때 씁니다.
-
-요즘은 이렇습니다.
-→ 요즘은
-
-어떤 사람인가
-→ 생각하는 방식
-
-삶에서 중요하게 생각하는 것
-→ 중요한 것
-
-일하며 배운 것
-→ 일하면서 생긴 기준
-
-어떻게 여기까지 왔나
-→ 어쩌다 여기까지 왔나
-```
-
-### Navigation labels
-
-현재 상단 nav는 다음 영어 라벨을 유지한다.
-
-```text
-Work / Writing / Now / About
-```
-
-이유:
-
-- `작업 / 글 / 지금 / 소개` 같은 기계적 한국어 번역보다 현재 영문 라벨이 자연스럽다고 판단했다.
-- 사용자가 별도 변경 요청하기 전 임의로 번역하지 않는다.
-
----
-
-## 9. Current Content State
-
-중요: 현재 Work/Writing 상세에는 **구조 검증용 fixture/sample 콘텐츠**가 있다.
-
-예:
-
-```text
-src/content/work/project-story-sample.md
 src/content/writing/weekend-after-becoming-a-dad.md
+draft: true
 ```
 
-이 파일들은 콘텐츠 모델과 route를 검증하기 위해 존재한다.
+실제 공개 글이 아니며 사용자 승인 없이 `draft: false`로 바꾸지 않는다.
 
-2026-08-24 사용자 승인에 따라 두 fixture는 `draft: true`로 유지하며 production 공개 대상에서 제외한다. 따라서 public 목록, 상세 static path, RSS, sitemap에 포함하지 않는다.
-
-원칙:
-
-- 실제 공개용 콘텐츠를 사용자 확인 없이 임의 창작하여 대체하지 않는다.
-- 회사 비공개 정보, 동료 식별 정보, 배우자/아이의 민감 정보는 넣지 않는다.
-- Content 단계에서 사용자와 함께 실제 공개 원고로 교체한다.
-
----
-
-## 10. Production Deployment Status
-
-2026-08-24 production 배포와 smoke test를 완료했다.
-
-Cloudflare Pages 현재 설정:
+Work 원고:
 
 ```text
-Project: byungklee
-Production URL: https://byungklee.pages.dev
+src/content/work/*.md
+```
+
+D-017 이후 public route는 없지만 원고 자체는 보존한다.
+
+## 6. Production and Git Safety
+
+Production:
+
+```text
+URL: https://byungklee.pages.dev
+Cloudflare project: byungklee
 Production branch: main
-Build command: npm run build
-Build output directory: dist
-Root directory: repository root
-NODE_VERSION: 24.19.0
-SITE_URL: https://byungklee.pages.dev
+origin/main before this local revision: 21c40fd
 Automatic preview branch deployments: disabled
 ```
 
-GitHub integration은 `lbk0523/personalpage`에 연결되어 있고 production branch의 새 commit은 자동 production 배포 대상이다. non-production branch의 자동 preview 배포는 production-only 승인 범위에 맞춰 `None`으로 설정했다.
+이 Writing 중심 revision은 production에 push 또는 deploy하지 않았다.
 
-완료된 검증:
+주의:
 
-1. `npm ci`, `npm run check`, `npm run build` 통과
-2. PR #1 squash merge와 GitHub checks 통과
-3. Cloudflare build에서 commit `3883d07`과 Node `24.19.0` 사용 확인
-4. `/`, `/work/`, `/writing/`, `/now/`, `/about/`, `/rss.xml`, `/sitemap-index.xml` 200 확인
-5. 존재하지 않는 경로와 두 fixture 상세 경로 404 확인
-6. HTTP → HTTPS 301 확인
-7. canonical과 `og:url`이 `https://byungklee.pages.dev` 기준인지 확인
-8. sitemap과 RSS XML parse 확인
-9. sitemap, RSS, public 목록에서 fixture 참조가 없는지 확인
-10. Aside browser에서 production Home / Work / Writing / Now / About / 404 렌더링 확인
+- `main` push는 production 자동 배포를 유발할 수 있다.
+- Git push, production deploy, custom domain 연결은 사용자 별도 승인 전 실행하지 않는다.
+- fixture public 전환과 실제 공개 원고 창작도 별도 사용자 검토가 필요하다.
 
-### Publication gate
+## 7. Next Work
 
-이전 권고는 다음과 같았다.
+1. 사용자와 실제 첫 Writing 원고 준비
+2. privacy와 공개 범위 검토
+3. local Home / Detail / RSS / sitemap 재검증
+4. 사용자가 public release를 승인할 때만 push와 production deploy 진행
 
-> Home / Work / Now / About은 현재 상태로 두고, 샘플 Work/Writing 2개를 실제 첫 콘텐츠로 교체한 뒤 공개하는 편이 깔끔하다.
-
-2026-08-24 사용자는 production에서 fixture를 제외하는 권고안에 동의했다. 실제 공개 원고가 준비될 때까지 두 fixture를 `draft: true`로 유지한다.
-
----
-
-## 11. Immediate Next Work for Local Codex
-
-### A. Keep the approved visual direction
-
-`docs/05_DESIGN_FOUNDATION.md`와 D-015를 현재 디자인 기준으로 사용한다. 구조나 기능을 넓히지 않고 실제 콘텐츠가 들어올 때 필요한 작은 조정만 한다.
-
-### B. Content stage
-
-fixture Work/Writing은 `draft: true`로 유지한다. 실제 콘텐츠는 사용자 원고가 준비된 뒤 교체하며, 사용자 사실이나 원고는 임의로 만들지 않는다.
-
-Implementation Definition of Done과 production publication은 완료됐다. 다음 작업은 실제 공개용 Work/Writing 원고를 준비하고 사용자 검토를 거쳐 게시하는 것이다.
-
-### C. Report to user before destructive/public actions
-
-아래는 사용자 승인 없이 하지 않는다.
-
-- PR merge
-- production deploy
-- custom domain 연결
-- fixture 콘텐츠를 `draft: false`로 바꾸는 결정
-- 실제 공개용 Work 내용 창작
-- 실제 공개용 Writing 원고 창작
-
-2026-08-24 사용자는 PR merge, Cloudflare GitHub integration, production 배포 실행을 승인했고 해당 작업은 완료됐다.
-
----
-
-## 12. Implementation Definition of Done
-
-Build Spec의 Implementation DoD:
-
-> 승인된 핵심 화면이 desktop/mobile에서 안정적으로 렌더링되고, Markdown으로 Work/Writing을 게시할 수 있으며, production build와 기본 SEO/accessibility가 동작한다.
-
-이 기준과 publication gate를 모두 충족했다. Implementation 단계는 완료됐으며 다음 단계는 Content다.
-
-추가 기능을 구현하여 Implementation을 불필요하게 연장하지 않는다.
-
----
-
-## 13. Do Not Do
-
-다음 작업을 임의로 하지 않는다.
-
-- 사이트를 다시 career portfolio 중심으로 변경
-- Home에 Selected Work hero 복원
-- Work를 카드형 프로젝트 gallery 중심으로 변경
-- Work Career Map을 승인 없이 제거
-- 별도 Parenting/Ayukdae route 추가
-- Topic / Series archive UI 추가
-- search 추가
-- CMS 추가
-- auth/comments/newsletter 추가
-- React/Tailwind 도입
-- analytics/tracker 추가
-- dark mode 추가
-- 복잡한 animation 추가
-- 임의 SEO growth 기능 추가
-- `main` 직접 작업
-- 기존 production 설정 임의 변경
-- 승인 없는 production 재배포 또는 rollback
-
----
-
-## 14. Handoff Success Condition
-
-로컬 Codex가 다음을 이해하면 핸드오프 성공이다.
-
-1. 현재 production source는 `main`의 `3883d07`이며 새 작업은 별도 branch와 PR에서 진행한다.
-2. 제품 전략/IA/Wireframe/Build Spec은 이미 승인됐다.
-3. Work visual direction도 현재 수준으로 유지한다.
-4. 한국어 copy pass와 승인된 foundation/design edge 구현이 완료됐다.
-5. fixture 콘텐츠는 production에서 제외하기로 결정됐다.
-6. 로컬 Node 24 검증과 핵심 화면 browser QA는 통과했다.
-7. canonical과 production URL은 `https://byungklee.pages.dev`이며 Cloudflare Pages production 배포와 smoke test가 완료됐다.
-8. non-production branch의 자동 preview 배포는 비활성화했다.
-9. SEED는 구조와 원칙을 참고할 뿐이며, 당근 브랜드나 React 컴포넌트를 복제하지 않는다.
-
-이 문서를 읽은 뒤 기존 결정을 다시 처음부터 재논의하지 말고 Content 단계의 실제 공개 원고 준비와 검토로 바로 이어간다.
+신규 기능, Topic/Series UI, Work/Now/About 복원, 외부 채널 자동 배포는 현재 범위가 아니다.

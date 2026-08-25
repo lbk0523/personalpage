@@ -3,65 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>이병관 — Wireframe</title>
+  <title>이병관 — Writing Archive Wireframe</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="site-shell">
-    <header class="site-header">
+  <header class="site-header">
+    <div class="site-shell">
       <a class="site-name" href="./index.html">이병관</a>
-      <nav class="site-nav" aria-label="주요 메뉴">
-        <a href="./work.html">Work</a>
-        <a href="./writing.html">Writing</a>
-        <a href="./now.html">Now</a>
-        <a href="./about.html">About</a>
-      </nav>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <p class="prototype-note">구조 검토용 와이어프레임입니다. 실제 한국어 문구와 시각 디자인은 아직 확정하지 않습니다.</p>
+  <main class="site-shell">
+    <p class="prototype-note">Writing 중심 공개판의 구조 검토용 와이어프레임입니다.</p>
 
-      <section class="page-intro">
-        <h1>이병관</h1>
-        <p class="lead">게임을 만들고 사업을 고민합니다. 생활 속 복잡한 문제를 구조화하는 것을 좋아하고, 요즘은 개인적으로 무언가를 만들고 아빠로 살아가는 법을 배우고 있습니다.</p>
-      </section>
+    <section class="page-intro">
+      <h1>생각이 남을 때 씁니다.</h1>
+      <p class="lead">일과 AI, 생활과 육아 사이에서 오래 붙잡게 되는 생각을 씁니다. 다른 곳에 나누더라도 글은 이곳에 오래 남겨둡니다.</p>
+    </section>
 
-      <section class="directory" aria-label="사이트 둘러보기">
-        <div class="directory-item">
-          <h2>일하고 만든 것</h2>
-          <p>어떤 일을 거쳐 지금의 역할에 왔는지, 그 과정에서 무엇을 만들고 배웠는지 기록합니다.</p>
-          <a href="./work.html">들어가기 →</a>
-        </div>
-        <div class="directory-item">
-          <h2>생각하고 기록한 것</h2>
-          <p>게임, 일하는 방식, 시스템, 삶과 육아에서 생긴 질문과 생각을 남깁니다.</p>
-          <a href="./writing.html">들어가기 →</a>
-        </div>
-        <div class="directory-item">
-          <h2>요즘의 나</h2>
-          <p>지금 집중하고 있는 일과 관심, 만들고 있는 것, 삶에서 중요해진 것을 짧게 업데이트합니다.</p>
-          <a href="./now.html">들어가기 →</a>
-        </div>
-        <div class="directory-item">
-          <h2>조금 더 나에 대해</h2>
-          <p>경력만으로는 설명되지 않는 배경, 관심과 태도, 이 사이트를 운영하는 이유를 적습니다.</p>
-          <a href="./about.html">들어가기 →</a>
-        </div>
-      </section>
+    <section class="archive" aria-labelledby="archive-title">
+      <h2 id="archive-title">쓴 글</h2>
+      <ul class="writing-list">
+        <li><time datetime="2026-08-20">2026. 08. 20.</time><h3><a href="./writing-detail.html">아빠가 된 뒤 주말을 다시 생각하게 된 이유</a></h3></li>
+        <li><time datetime="2026-08-12">2026. 08. 12.</time><h3><a href="./writing-detail.html">시스템을 만드는 일이 일을 하는 것보다 재미있어질 때</a></h3></li>
+        <li><time datetime="2026-08-03">2026. 08. 03.</time><h3><a href="./writing-detail.html">콘텐츠 기획자에서 사업 PM으로 옮기며 달라진 시야</a></h3></li>
+      </ul>
+    </section>
+  </main>
 
-      <section class="now-strip" aria-label="최근 상태">
-        <p class="eyebrow">요즘</p>
-        <div class="now-items">
-          <div class="now-item"><strong>일</strong><span>게임 사업 PM으로 일하고 있습니다.</span></div>
-          <div class="now-item"><strong>만드는 것</strong><span>작은 개인 프로젝트와 개인 웹사이트를 만들고 있습니다.</span></div>
-          <div class="now-item"><strong>삶</strong><span>아빠가 된 뒤 달라지는 생각을 기록하려 합니다.</span></div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="footer-links"><span>© 이병관</span><a href="#">Email</a><a href="#">GitHub</a><a href="#">RSS</a></div>
-    </footer>
-  </div>
+  <footer class="site-footer">
+    <div class="site-shell footer-inner">
+      <div><span>© 이병관</span><p>살아가며 오래 붙잡게 되는 생각을 씁니다.</p></div>
+      <a href="#">RSS</a>
+    </div>
+  </footer>
 </body>
 </html>

@@ -8,8 +8,8 @@ export const GET: APIRoute = async (context) => {
   );
 
   return rss({
-    title: '이병관 — Writing',
-    description: '게임과 일, AI, 만드는 것, 생활과 육아에 관해 씁니다.',
+    title: '이병관 — 쓴 글',
+    description: '일과 AI, 생활과 육아 사이에서 오래 붙잡게 되는 생각을 씁니다.',
     site: context.site ?? new URL('https://byungklee.pages.dev'),
     customData: '<language>ko</language>',
     items: entries.map((entry) => ({

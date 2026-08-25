@@ -1,125 +1,138 @@
-# Personal Page
+# Personal Writing Site
 
-이병관의 일과 만든 것, 현재의 관심, 살아가며 발전시키는 생각을 자신의 이름 아래 장기간 축적하고 세상과 공유하는 개인 웹사이트.
+이병관이 살아가며 오래 붙잡게 되는 생각을 공개하고, 다른 사람이 지금과 미래에 읽을 수 있도록 장기간 축적하는 개인 웹사이트.
+
+웹사이트는 공개 원문과 아카이브를 담당한다. X 등 외부 채널은 글을 발견하게 하고 반응을 주고받는 배포·대화 수단으로 사용할 수 있다.
 
 ## Current Phase
 
-1. Strategy ✅
-2. IA ✅
-3. Wireframe ✅
-4. Build Spec ✅
-5. Implementation ✅
-6. Content ← NOW
-7. Operation
-
-## Project Workflow
+2026-08-25 Writing 중심 전략 개정과 로컬 구현 조정을 완료했다.
 
 ```text
-Strategy
-  ↓
-IA
-  ↓
-Wireframe (GitHub HTML/CSS + Figma reference)
-  ↓
-Build Spec
-  ↓
-Implementation
-  ↓
-Content
-  ↓
+Strategy Revision ✅
+IA Revision ✅
+Wireframe Revision ✅
+Build Spec Revision ✅
+Implementation Adjustment ✅
+Content ← NEXT
 Operation
 ```
 
+로컬 변경은 production에 push 또는 deploy하지 않았다.
+
+## Approved Public Structure
+
+```text
+/
+├─ /writing/[slug]
+├─ /rss.xml
+└─ /404
+```
+
+`/`는 Home과 Writing Archive 역할을 함께 수행한다.
+
+초기 public build에서 제외:
+
+```text
+/writing
+/work
+/work/[slug]
+/now
+/about
+```
+
+기존 Work 콘텐츠와 구현 이력은 저장소에 보존하지만 public HTML은 생성하지 않는다.
+
 ## Source of Truth
 
-이 저장소의 승인된 문서를 프로젝트 정본으로 사용한다.
-대화 기록이나 개별 AI agent의 추정은 정본이 아니다.
+아래 순서로 읽는다.
 
-승인된 Wireframe 구조의 기준은 `design/wireframe/`의 responsive HTML/CSS prototype과 `docs/02_WIREFRAME.md`다.
-Figma는 초기 탐색과 시각적 참고 기록용으로 사용하며 필수 의존성으로 두지 않는다.
+1. `AGENTS.md`
+2. `docs/00_STRATEGY.md` — APPROVED, revised 2026-08-25
+3. `docs/01_IA.md` — APPROVED, revised 2026-08-25
+4. `docs/02_WIREFRAME.md` — APPROVED, revised 2026-08-25
+5. `docs/03_BUILD_SPEC.md` — APPROVED, revised 2026-08-25
+6. `docs/DECISIONS.md` — D-017
+7. `docs/05_DESIGN_FOUNDATION.md`
+8. `docs/04_LOCAL_CODEX_HANDOFF.md`
 
-구현은 `docs/03_BUILD_SPEC.md`의 기술 계약과 Acceptance Criteria를 따른다.
-로컬 Codex 인계 시에는 `docs/04_LOCAL_CODEX_HANDOFF.md`의 현재 브랜치·PR·남은 관문 정보를 함께 따른다.
+대화 기록이나 agent의 기억보다 저장소 문서를 우선한다.
 
-## Start Here
-
-AI agent와 작업자는 아래 순서로 읽는다.
-
-1. `README.md`
-2. `AGENTS.md`
-3. `docs/00_STRATEGY.md`
-4. `docs/01_IA.md`
-5. `docs/02_WIREFRAME.md` — APPROVED
-6. `docs/03_BUILD_SPEC.md` — APPROVED
-7. `docs/DECISIONS.md`
-8. `docs/05_DESIGN_FOUNDATION.md` — APPROVED
-9. `docs/04_LOCAL_CODEX_HANDOFF.md` — 현재 production 및 Content 인계 상태
-
-## Current Artifacts
+## Active Wireframe
 
 ```text
-docs/
-├─ 00_STRATEGY.md
-├─ 01_IA.md
-├─ 02_WIREFRAME.md
-├─ 03_BUILD_SPEC.md
-├─ 04_LOCAL_CODEX_HANDOFF.md
-├─ 05_DESIGN_FOUNDATION.md
-└─ DECISIONS.md
-
-design/
-└─ wireframe/
-   ├─ index.html
-   ├─ work.html
-   ├─ work-detail.html
-   ├─ writing.html
-   ├─ writing-detail.html
-   ├─ now.html
-   ├─ about.html
-   ├─ styles.css
-   └─ README.md
+design/wireframe/
+├─ index.html
+├─ writing-detail.html
+├─ styles.css
+└─ README.md
 ```
 
-## Current Production
-
-Production URL:
-
-```text
-https://byungklee.pages.dev
-```
-
-- Cloudflare Pages project: `byungklee`
-- Production branch: `main`
-- GitHub repository: `lbk0523/personalpage`
-- PR #1 `Implement Astro v1 site skeleton`: squash merged
-- Production deployment: commit `3883d07`
-- Automatic preview branch deployments: disabled
-- Fixture Work/Writing entries: `draft: true`, public output에서 제외
-
-다음 작업은 Content 단계다. 로컬 Codex 또는 새로운 agent가 이어갈 때는 먼저 `docs/04_LOCAL_CODEX_HANDOFF.md`를 확인한다.
-
-## Local Wireframe Review
+로컬 검토:
 
 ```bash
 python3 -m http.server 8080
 ```
 
-브라우저에서:
-
 ```text
 http://localhost:8080/design/wireframe/
 ```
 
-## Deferred Design Requirement
+## Local Development
 
-Work의 `걸어온 길` Career Timeline은 Wireframe의 정보 구조를 유지하되, 최종 웹디자인에서 단순 연도/텍스트 목록보다 경력의 흐름과 전환이 시각적으로 느껴지는 표현으로 refinement한다.
+Node 24 사용:
 
-현재 production 구현에는 이 요구를 infographic-style Career Map으로 반영했다.
+```bash
+npm ci
+npm run check
+npm run build
+npm run dev
+```
 
-## Implementation Stop Rule
+## Content
 
-아래 조건이 충족되면 구현을 멈추고 Content 단계로 이동한다.
+Writing source:
 
-> 승인된 핵심 화면이 desktop/mobile에서 안정적으로 렌더링되고, Markdown으로 Work/Writing을 게시할 수 있으며, production build와 기본 SEO/accessibility가 동작한다.
+```text
+src/content/writing/*.md
+```
 
-미승인 기능은 Implementation 중 추가하지 않는다.
+필수 frontmatter:
+
+```yaml
+title: "글 제목"
+description: "공유와 검색에 사용할 짧은 설명"
+publishedAt: 2026-08-25
+type: essay
+topics: []
+draft: true
+```
+
+실제 공개 전에는 `draft: true`를 유지한다. 구조 검증용 Writing fixture도 production 목록, 상세 route, RSS, sitemap에서 제외한다.
+
+## Production
+
+```text
+URL: https://byungklee.pages.dev
+Cloudflare project: byungklee
+Production branch: main
+Automatic preview branch deployments: disabled
+```
+
+주의:
+
+- 현재 production은 D-017 이전 구현을 유지한다.
+- 로컬 `main`을 push하면 Cloudflare production 자동 배포가 발생할 수 있다.
+- push와 production deploy는 사용자 별도 승인 전 실행하지 않는다.
+
+## Publication Gate
+
+첫 공개의 기준은 프로필 페이지 완성이 아니다.
+
+- 사용자 검토를 마친 실제 Writing이 최소 하나 존재한다.
+- Home에서 해당 글을 바로 발견할 수 있다.
+- Writing Detail을 독립 URL로 읽고 공유할 수 있다.
+- fixture와 제외 route가 public output, RSS, sitemap에 없다.
+- `npm run check`와 `npm run build`가 통과한다.
+
+실제 공개 원고를 사용자 확인 없이 창작하거나 fixture를 임의로 public 전환하지 않는다.

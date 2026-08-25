@@ -6,21 +6,26 @@ type Props = {
   title: string;
   description: string;
   date?: Date;
+  updatedAt?: Date;
   type?: string;
   series?: string;
-  period?: string;
-  role?: string;
   backHref: string;
   backLabel: string;
 };
 
 const props = Astro.props;
 ---
-<BaseLayout title={props.title} description={props.description} type="article" publishedAt={props.date}>
+<BaseLayout
+  title={props.title}
+  description={props.description}
+  type="article"
+  publishedAt={props.date}
+  updatedAt={props.updatedAt}
+>
   <article class="reading">
     <header class="reading__header">
       <h1>{props.title}</h1>
-      <ContentMeta date={props.date} type={props.type} series={props.series} period={props.period} role={props.role} />
+      <ContentMeta date={props.date} updatedAt={props.updatedAt} type={props.type} series={props.series} />
     </header>
     <div class="prose">
       <slot />

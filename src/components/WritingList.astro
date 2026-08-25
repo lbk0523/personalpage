@@ -18,10 +18,7 @@ const formatter = new Intl.DateTimeFormat('ko-KR', {
       entries.map((entry) => (
         <li>
           <time datetime={entry.data.publishedAt.toISOString()}>{formatter.format(entry.data.publishedAt)}</time>
-          <div>
-            <h2><a href={`/writing/${entry.id}/`}>{entry.data.title}</a></h2>
-            <p>{entry.data.description}</p>
-          </div>
+          <h3><a href={`/writing/${entry.id}/`}>{entry.data.title}</a></h3>
         </li>
       ))
     }
