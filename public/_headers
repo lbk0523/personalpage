@@ -1,0 +1,14 @@
+/work*
+  Cache-Control: no-store, max-age=0
+
+/now*
+  Cache-Control: no-store, max-age=0
+
+/about*
+  Cache-Control: no-store, max-age=0
+
+/writing
+  Cache-Control: no-store, max-age=0
+
+/writing/
+  Cache-Control: no-store, max-age=0

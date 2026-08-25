@@ -358,3 +358,21 @@ Private Draft
 - D-016의 기존 public route 범위
 
 D-001의 개인 이름 상위 브랜드, D-002의 육아 콘텐츠 Writing 내부 운영, D-014와 D-015의 공통 디자인 foundation은 새 공개 범위 안에서 유지한다.
+
+---
+
+## D-018 — 2026-08-25 — Writing 중심 revision을 production에 배포
+
+### Decision
+
+사용자 승인에 따라 D-017의 Writing 중심 구현을 `main`에 push하고 Cloudflare Pages project `byungklee`의 production에 배포한다.
+
+- canonical URL은 `https://byungklee.pages.dev`
+- Home, Writing Detail, RSS, 404만 public 구조로 유지
+- Work, Now, About, 별도 Writing index는 build output에서 제외
+- 구조 검증용 Writing fixture는 `draft: true`를 유지하여 Home, 상세 route, RSS, sitemap에서 제외
+- Cloudflare의 삭제 자산 cache가 제거 경로를 다시 제공하지 않도록 legacy 경로에 `no-store` header를 적용
+
+### Reason
+
+승인된 전략과 구현을 실제 공개 사이트의 기본 구조로 전환하기 위함이다. 첫 실제 Writing은 아직 없으므로 이번 배포는 공개 글을 임의 생성하거나 fixture를 공개하지 않고, 장기적으로 글을 쌓을 수 있는 정본 구조만 먼저 연다.

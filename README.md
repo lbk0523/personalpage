@@ -121,7 +121,9 @@ Automatic preview branch deployments: disabled
 
 주의:
 
-- 현재 production은 D-017 이전 구현을 유지한다.
+- 현재 production은 D-017 Writing 중심 구현을 제공한다.
+- Work, Now, About, 별도 Writing index는 public build에서 제외한다.
+- 제거 경로에는 Cloudflare의 삭제 자산 재캐시를 막기 위한 `no-store` header를 적용한다.
 - 로컬 `main`을 push하면 Cloudflare production 자동 배포가 발생할 수 있다.
 - push와 production deploy는 사용자 별도 승인 전 실행하지 않는다.
 

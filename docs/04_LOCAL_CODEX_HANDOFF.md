@@ -15,6 +15,8 @@ Updated: 2026-08-25 KST
 - Astro public route와 Home 구조 조정
 - responsive browser QA
 - local check/build/route/XML 검증
+- `main` push와 Cloudflare Pages production 배포
+- production Home, RSS, sitemap, 404 화면 smoke test
 
 현재 다음 단계는 **실제 공개용 Writing 준비**다.
 
@@ -152,7 +154,16 @@ origin/main before this local revision: 21c40fd
 Automatic preview branch deployments: disabled
 ```
 
-이 Writing 중심 revision은 production에 push 또는 deploy하지 않았다.
+Writing 중심 구현 커밋 `c3d6f67`은 2026-08-25 production에 배포되었다.
+
+Production smoke test:
+
+- Home은 Writing Archive 구조와 새 문구를 제공
+- RSS와 sitemap은 정상 응답하며 draft fixture를 포함하지 않음
+- draft Writing detail은 404
+- 이전 Work, Now, About, Writing index 내용은 더 이상 노출되지 않고 404 화면을 제공
+
+Cloudflare Pages는 삭제 자산을 데이터센터에 최대 1주 보존할 수 있다. 배포 직후 canonical URL의 기존 네 경로에 예전 HTML cache가 남아 있어 임시 404 사본으로 cache key를 교체했다. 현재 화면은 404지만 일부 edge에서 HTTP status가 일시적으로 `200`일 수 있으므로, `public/_headers`의 `no-store` 규칙으로 재캐시를 방지하고 후속 운영 시 상태가 `404`로 수렴했는지 확인한다.
 
 주의:
 
@@ -165,6 +176,6 @@ Automatic preview branch deployments: disabled
 1. 사용자와 실제 첫 Writing 원고 준비
 2. privacy와 공개 범위 검토
 3. local Home / Detail / RSS / sitemap 재검증
-4. 사용자가 public release를 승인할 때만 push와 production deploy 진행
+4. 실제 원고 공개 전 사용자 최종 확인 후 `draft: false` 전환과 production 배포
 
 신규 기능, Topic/Series UI, Work/Now/About 복원, 외부 채널 자동 배포는 현재 범위가 아니다.
