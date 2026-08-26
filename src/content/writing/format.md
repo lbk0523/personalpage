@@ -5,7 +5,6 @@ publishedAt: 2026-08-25
 type: essay
 topics:
   - 일상
-series:
 draft: true
 ---
 
