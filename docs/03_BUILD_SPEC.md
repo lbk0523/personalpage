@@ -168,7 +168,7 @@ BaseLayout
 Approved copy direction:
 
 ```text
-생각이 남을 때 씁니다.
+생각 서랍장
 
 일과 AI, 생활과 육아 사이에서 오래 붙잡게 되는 생각을 씁니다.
 다른 곳에 나누더라도 글은 이곳에 오래 남겨둡니다.
