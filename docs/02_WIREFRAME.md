@@ -45,17 +45,17 @@ Home은 개인 영역을 나열하는 디렉터리가 아니라 **공개된 글�
 ```text
 Header: 이병관
 ↓
-Intro: 생각 서랍장
+Page title: 생각 서랍장
 ↓
 Writing Archive: 날짜 + 제목
 ↓
-Footer: 짧은 설명 + RSS
+Footer: 저작권
 ```
 
 구조 원칙:
 
 - Header에는 별도 primary navigation을 두지 않는다.
-- Intro는 사이트의 쓰기와 공유 목적만 짧게 말한다.
+- Home은 제목 아래에 별도 subtitle이나 설명문을 두지 않는다.
 - 경력, 현재 역할, 프로젝트, Now 상태를 Home에 넣지 않는다.
 - 공개 글은 Home에서 한 번의 추가 navigation 없이 바로 보인다.
 - Writing 항목은 날짜와 제목이 먼저 읽히게 한다.
@@ -141,14 +141,14 @@ Writing-only 전환을 이유로 새로운 시각 테마나 animation을 추가�
 - 직업 소개로 시작하지 않는다.
 - `Writing`을 별도 메뉴나 서비스 이름처럼 반복 노출하지 않는다.
 - Home 제목은 `생각 서랍장`을 사용한다.
-- Intro는 외부 채널에 나누더라도 원문은 이곳에 오래 남긴다는 뜻을 자연스럽게 전달한다.
+- Home 제목 다음에는 설명 영역 없이 Writing Archive가 바로 이어진다.
 
 ## Cross-page Consistency Rules
 
 1. Home은 Writing Archive다.
 2. Header의 이름은 항상 Home으로 돌아간다.
 3. Writing Detail은 읽기와 출처 확인을 우선한다.
-4. Footer는 저자 맥락과 RSS만 제공한다.
+4. Footer는 저작권만 제공한다.
 5. Work, Now, About을 암시하는 빈 navigation이나 teaser를 만들지 않는다.
 6. 실제 공개 콘텐츠가 생기기 전 fixture를 public UI에 노출하지 않는다.
 

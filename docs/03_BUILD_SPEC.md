@@ -157,9 +157,8 @@ Structure:
 
 ```text
 BaseLayout
-└─ Intro
-   ├─ h1
-   └─ lead copy
+└─ Page title
+   └─ h1
 └─ Writing archive, public entry가 있을 때
    ├─ section heading
    └─ WritingList
@@ -169,14 +168,12 @@ Approved copy direction:
 
 ```text
 생각 서랍장
-
-일과 AI, 생활과 육아 사이에서 오래 붙잡게 되는 생각을 씁니다.
-다른 곳에 나누더라도 글은 이곳에 오래 남겨둡니다.
 ```
 
 요구사항:
 
 - 이름은 Header에서 보이므로 Home h1에서 다시 크게 반복하지 않는다.
+- Home h1 아래에는 lead, subtitle, description 영역을 렌더링하지 않는다.
 - Work, Now, About directory와 current strip을 제거한다.
 - public Writing이 없을 때 fixture, 가짜 제목, 빈 card를 렌더링하지 않는다.
 - public Writing이 생기면 Home에서 즉시 목록이 보인다.
@@ -235,9 +232,7 @@ ReadingLayout
 ### `SiteFooter`
 
 - copyright
-- 사이트 성격을 말하는 짧은 문장
-- RSS link
-- 외부 채널 링크는 실제 운영 결정 전 추가하지 않음
+- 설명 문구와 navigation link 없음
 
 ### `WritingList`
 
@@ -397,7 +392,7 @@ build output 검증:
 - Work, Now, About, 별도 Writing index가 public build에서 생성되지 않는다.
 - Writing Detail은 독립 URL, canonical, metadata, 읽기 중심 layout을 제공한다.
 - Header에는 이름 외 primary navigation이 없다.
-- Footer는 짧은 저자 맥락과 RSS만 제공한다.
+- Footer는 저작권만 제공한다.
 - draft Writing은 목록, detail, sitemap, RSS에 나타나지 않는다.
 - existing warm editorial foundation과 responsive behavior를 유지한다.
 - client JavaScript와 신규 dependency를 추가하지 않는다.

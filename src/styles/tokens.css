@@ -102,7 +102,6 @@
   --type-reading-title-size: clamp(2.125rem, 9vw, 2.75rem);
   --type-section-title-size: clamp(1.75rem, 3.2vw, 2.25rem);
   --type-item-title-size: var(--ref-font-size-t7);
-  --type-lead-size: clamp(var(--ref-font-size-t6), 2vw, var(--ref-font-size-t8));
   --type-body-size: var(--ref-font-size-t5);
   --type-reading-body-size: 1.0625rem;
   --type-label-size: var(--ref-font-size-t4);
