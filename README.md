@@ -6,7 +6,7 @@
 
 ## Current Phase
 
-2026-08-25 Writing 중심 전략 개정과 로컬 구현 조정을 완료했다.
+2026-08-26 첫 실제 Writing `평범하게 산다는 것`을 production에 공개했다.
 
 ```text
 Strategy Revision ✅
@@ -14,11 +14,10 @@ IA Revision ✅
 Wireframe Revision ✅
 Build Spec Revision ✅
 Implementation Adjustment ✅
-Content ← NEXT
-Operation
+Content / Operation ← CURRENT
 ```
 
-로컬 변경은 production에 push 또는 deploy하지 않았다.
+현재 Home에서 공개 글을 발견하고 독립 URL로 읽을 수 있으며 RSS와 sitemap에도 포함된다.
 
 ## Approved Public Structure
 

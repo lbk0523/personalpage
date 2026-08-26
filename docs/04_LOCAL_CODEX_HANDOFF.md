@@ -1,6 +1,6 @@
 # Local Codex Handoff — Writing Site Revision
 
-Updated: 2026-08-25 KST
+Updated: 2026-08-26 KST
 
 ## 1. Current State
 
@@ -17,8 +17,10 @@ Updated: 2026-08-25 KST
 - local check/build/route/XML 검증
 - `main` push와 Cloudflare Pages production 배포
 - production Home, RSS, sitemap, 404 화면 smoke test
+- 첫 실제 Writing `평범하게 산다는 것` 공개
+- production Home, Writing Detail, RSS, sitemap 재검증
 
-현재 다음 단계는 **실제 공개용 Writing 준비**다.
+현재 단계는 **Writing을 계속 준비하고 공개하는 Content / Operation**이다.
 
 ## 2. Approved Product Direction
 
@@ -116,7 +118,7 @@ Browser QA:
 - 320 / 390 / 760 / 761 / 1280 / 1440 width 확인
 - 모든 검토 폭에서 horizontal overflow 없음
 - Home / Writing Detail console error·warning 없음
-- final state에서 public Writing count 0 확인
+- first Writing 공개 전 final state에서 public Writing count 0 확인
 
 Known QA note:
 
@@ -124,6 +126,25 @@ Known QA note:
 - RSS 파일 자체는 build output과 `xmllint`로 정상 검증했다.
 
 ## 5. Content State
+
+첫 공개 Writing:
+
+```text
+src/content/writing/ordinary.md
+draft: false
+URL: https://byungklee.pages.dev/writing/ordinary/
+```
+
+2026-08-26 production에서 Home, 상세 route, RSS, sitemap 노출을 확인했다.
+
+Writing 초안:
+
+```text
+src/content/writing/format.md
+draft: true
+```
+
+`ordinary`와 일부 내용이 겹치는 미완성 초안이며 public output에서 제외한다.
 
 Writing fixture:
 
@@ -155,12 +176,15 @@ Automatic preview branch deployments: disabled
 ```
 
 Writing 중심 구현 커밋 `c3d6f67`은 2026-08-25 production에 배포되었다.
+첫 Writing 공개 커밋 `aaa327e`는 2026-08-26 production에 배포되었다.
 
 Production smoke test:
 
 - Home은 Writing Archive 구조와 새 문구를 제공
 - RSS와 sitemap은 정상 응답하며 draft fixture를 포함하지 않음
 - draft Writing detail은 404
+- `ordinary`는 Home, 독립 상세 URL, RSS, sitemap에서 정상 공개
+- `format`과 fixture Writing detail은 404
 - 이전 Work, Now, About, Writing index 내용은 더 이상 노출되지 않고 404 화면을 제공
 
 Cloudflare Pages는 삭제 자산을 데이터센터에 최대 1주 보존할 수 있다. 배포 직후 canonical URL의 기존 네 경로에 예전 HTML cache가 남아 있어 임시 404 사본으로 cache key를 교체했다. 현재 화면은 404지만 일부 edge에서 HTTP status가 일시적으로 `200`일 수 있으므로, `public/_headers`의 `no-store` 규칙으로 재캐시를 방지하고 후속 운영 시 상태가 `404`로 수렴했는지 확인한다.
@@ -173,7 +197,7 @@ Cloudflare Pages는 삭제 자산을 데이터센터에 최대 1주 보존할 �
 
 ## 7. Next Work
 
-1. 사용자와 실제 첫 Writing 원고 준비
+1. 다음 Writing 원고 준비
 2. privacy와 공개 범위 검토
 3. local Home / Detail / RSS / sitemap 재검증
 4. 실제 원고 공개 전 사용자 최종 확인 후 `draft: false` 전환과 production 배포
