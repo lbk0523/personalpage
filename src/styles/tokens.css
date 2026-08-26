@@ -97,12 +97,13 @@
   --color-stroke-focus: var(--ref-color-blue-700);
 
   /* Semantic typography roles */
-  --type-display-title-size: clamp(3rem, 13vw, 3.5rem);
+  --type-display-title-size: clamp(3.25rem, 16vw, 4.5rem);
   --type-page-title-size: clamp(2.625rem, 11vw, 3.25rem);
   --type-reading-title-size: clamp(2.125rem, 9vw, 2.75rem);
   --type-section-title-size: clamp(1.75rem, 3.2vw, 2.25rem);
   --type-item-title-size: var(--ref-font-size-t7);
   --type-body-size: var(--ref-font-size-t5);
+  --type-drawer-title-size: var(--type-body-size);
   --type-reading-body-size: 1.0625rem;
   --type-label-size: var(--ref-font-size-t4);
   --type-meta-size: var(--ref-font-size-t3);
@@ -122,6 +123,7 @@
   --spacing-page-start: var(--ref-space-x12);
   --spacing-page-end: var(--ref-space-x18);
   --spacing-intro-end: var(--ref-space-x12);
+  --spacing-home-intro-end: clamp(var(--ref-space-x14), 8vw, 6.5rem);
   --spacing-section-block: var(--ref-space-x8);
   --spacing-section-column: var(--ref-space-x6);
   --spacing-list-row: var(--ref-space-x5);
@@ -152,7 +154,8 @@
     --spacing-section-block: var(--ref-space-x12);
     --spacing-section-column: clamp(var(--ref-space-x8), 6vw, var(--ref-space-x24));
     --spacing-list-row: var(--ref-space-x6);
-    --type-display-title-size: clamp(3.5rem, 7.5vw, 5.5rem);
+    --type-display-title-size: clamp(3.5rem, 8vw, 6.75rem);
+    --type-drawer-title-size: clamp(var(--ref-font-size-t6), 2vw, var(--ref-font-size-t8));
     --type-page-title-size: clamp(3.25rem, 6vw, 4.25rem);
     --type-reading-title-size: clamp(2.75rem, 5vw, 3.5rem);
   }

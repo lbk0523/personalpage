@@ -376,3 +376,25 @@ D-001의 개인 이름 상위 브랜드, D-002의 육아 콘텐츠 Writing 내�
 ### Reason
 
 승인된 전략과 구현을 실제 공개 사이트의 기본 구조로 전환하기 위함이다. 첫 실제 Writing은 아직 없으므로 이번 배포는 공개 글을 임의 생성하거나 fixture를 공개하지 않고, 장기적으로 글을 쌓을 수 있는 정본 구조만 먼저 연다.
+
+---
+
+## D-019 — 2026-08-26 — Home Writing Archive에 절제된 서랍장 문법을 적용
+
+### Decision
+
+Home의 `생각 서랍장`이라는 이름을 시각 구조에도 반영한다.
+
+- Writing 목록 전체를 하나의 넓은 cabinet frame으로 묶는다.
+- 각 Writing entry는 날짜, 제목, 짧은 선형 handle로 구성된 drawer front로 표현한다.
+- drawer 전체를 글 상세로 이동하는 하나의 링크로 사용한다.
+- `쓴 글` section heading은 제거하여 `생각 서랍장`에서 drawer archive로 바로 이어지게 한다.
+- 데스크톱 hover와 keyboard focus에서 drawer는 오른쪽으로 최대 2px 이동하고 작은 shadow가 생긴다. 모바일에서는 이동시키지 않는다.
+- 나무 질감, grain, 실제 가구 이미지, 과도한 입체감은 사용하지 않는다.
+- Writing Detail은 기존의 읽기 중심 layout을 유지한다.
+
+### Reason
+
+사이트가 포트폴리오가 아닌 개인 Writing archive라는 정체성을 더 분명하게 드러내면서도, 글보다 장식이 먼저 보이지 않게 하기 위함이다. 여러 시각안 중 기존 warm editorial foundation을 가장 많이 보존하는 넓은 서랍장 방향을 사용자가 승인했다.
+
+이 결정은 D-015의 grouped paper surface 규칙에 대한 Home Writing Archive 한정 예외이며, D-017의 공개 범위와 읽기 우선 원칙은 변경하지 않는다.

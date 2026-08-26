@@ -1,7 +1,7 @@
 # Personal Writing Site — Build Spec
 
 Status: APPROVED
-Revised and Approved: 2026-08-25
+Revised and Approved: 2026-08-26
 Supersedes: Version approved 2026-08-22
 
 ## 1. Purpose
@@ -160,8 +160,8 @@ BaseLayout
 └─ Page title
    └─ h1
 └─ Writing archive, public entry가 있을 때
-   ├─ section heading
-   └─ WritingList
+   └─ WritingList, aria-label="쓴 글"
+      └─ Writing drawer link: publishedAt + title + decorative handle
 ```
 
 Approved copy direction:
@@ -172,11 +172,14 @@ Approved copy direction:
 
 요구사항:
 
-- 이름은 Header에서 보이므로 Home h1에서 다시 크게 반복하지 않는다.
+- Home h1은 Header의 개인 이름을 반복하지 않고 `생각 서랍장`을 크게 표시한다.
 - Home h1 아래에는 lead, subtitle, description 영역을 렌더링하지 않는다.
+- Home h1과 WritingList 사이에 별도 section heading을 렌더링하지 않는다.
 - Work, Now, About directory와 current strip을 제거한다.
 - public Writing이 없을 때 fixture, 가짜 제목, 빈 card를 렌더링하지 않는다.
 - public Writing이 생기면 Home에서 즉시 목록이 보인다.
+- WritingList 전체는 하나의 넓은 cabinet frame으로 묶고 각 entry는 하나의 drawer link로 렌더링한다.
+- drawer의 선형 handle은 `aria-hidden` 장식이며 날짜와 제목이 accessible name의 핵심이다.
 
 ### 6.2 `/writing/[slug]` — Writing Detail
 
@@ -237,9 +240,10 @@ ReadingLayout
 ### `WritingList`
 
 - `CollectionEntry<'writing'>[]` 입력
-- 날짜 + 제목만 표시
+- 날짜 + 제목 + `aria-hidden` 선형 handle 표시
+- 목록 전체는 cabinet frame, 각 항목 전체는 하나의 drawer link
 - 설명과 card CTA 없음
-- 항목 전체를 과도한 card로 만들지 않음
+- texture, 실제 가구 이미지, 과도한 card 입체감 없음
 - empty message를 자체 생성하지 않음
 
 ### `ContentMeta`
@@ -263,7 +267,7 @@ ReadingLayout
 
 - Wanted Sans Variable
 - warm neutral canvas
-- paper-like grouped archive surface
+- paper-like surface를 기본으로 하되 Home archive는 cabinet frame + drawer front 예외 적용
 - muted ink blue link와 focus state
 - 0–2px radius
 - subtle border와 낮은 desktop elevation
@@ -281,13 +285,15 @@ desktop: ≥ 761px
 - Header는 이름 한 줄
 - Home intro는 한 열
 - Writing row는 날짜 → 제목 순서의 한 열
-- Archive surface는 viewport 폭에 가깝게 확장하고 shadow 제거
+- 선형 handle은 날짜와 제목 오른쪽에 유지
+- Cabinet surface는 viewport 폭에 가깝게 확장하고 shadow 제거
 - Reading body는 가로 overflow 없이 한 열
 
 ### Desktop
 
 - Header와 Footer는 content max width 안에서 정렬
-- Writing row는 날짜 고정 column + 제목 flexible column
+- Writing row는 날짜 고정 column + 제목 flexible column + handle column
+- drawer hover와 keyboard focus는 오른쪽 2px 이동과 작은 shadow로 제한
 - Reading body는 reading max width로 중앙 정렬
 
 검토 폭:

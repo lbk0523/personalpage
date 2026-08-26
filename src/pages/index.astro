@@ -13,8 +13,7 @@ const entries = (await getCollection('writing', ({ data }) => !data.draft)).sort
   </section>
 
   {entries.length > 0 && (
-    <section class="archive" aria-labelledby="archive-title">
-      <h2 id="archive-title">쓴 글</h2>
+    <section class="archive" aria-label="쓴 글">
       <WritingList entries={entries} />
     </section>
   )}

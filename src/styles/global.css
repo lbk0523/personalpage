@@ -143,54 +143,109 @@ p {
 
 .home-title {
   max-width: 55rem;
-  margin-bottom: var(--spacing-intro-end);
+  margin-bottom: var(--spacing-home-intro-end);
 }
 
 .home-title h1 {
   margin-bottom: 0;
-}
-
-.archive > h2 {
-  margin-bottom: var(--ref-space-x5);
-  font-size: var(--ref-font-size-t6);
-  letter-spacing: -0.015em;
+  font-size: var(--type-display-title-size);
+  letter-spacing: -0.06em;
 }
 
 .writing-list {
+  --cabinet-frame: #d8d2c8;
+  --cabinet-edge: #c7c0b5;
+  --cabinet-foot: #bcb5a9;
+  --cabinet-handle: #aaa49b;
+  --cabinet-handle-edge: #858078;
+
+  position: relative;
   width: 100vw;
   margin: 0 0 0 calc(50% - 50vw);
-  padding: 0;
+  padding: 6px 0;
   border-top: 1px solid var(--color-stroke-subtle);
   border-bottom: 1px solid var(--color-stroke-subtle);
-  background: var(--color-bg-surface);
+  background: var(--cabinet-frame);
   list-style: none;
 }
 
-.writing-list li {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-between-text);
-  padding: var(--spacing-list-row) var(--spacing-page-inline);
-  border-bottom: 1px solid var(--color-stroke-subtle);
+.writing-list::before,
+.writing-list::after {
+  position: absolute;
+  bottom: -10px;
+  width: var(--ref-space-x4);
+  height: var(--ref-space-x2-5);
+  background: var(--cabinet-foot);
+  content: '';
 }
 
-.writing-list li:last-child {
-  border-bottom: 0;
+.writing-list::before {
+  left: var(--ref-space-x4-5);
+}
+
+.writing-list::after {
+  right: var(--ref-space-x4-5);
+}
+
+.writing-list li + li {
+  margin-top: 5px;
+}
+
+.writing-drawer {
+  min-height: 8.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3.25rem;
+  align-items: center;
+  gap: var(--ref-space-x4);
+  padding: var(--spacing-list-row) var(--spacing-page-inline);
+  border-top: 1px solid var(--cabinet-edge);
+  border-bottom: 1px solid var(--cabinet-edge);
+  background: var(--color-bg-surface);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 75%);
+  color: var(--color-fg-default);
+  text-decoration: none;
+  transition:
+    transform var(--motion-interactive),
+    box-shadow var(--motion-interactive),
+    border-color var(--motion-interactive);
+}
+
+.writing-drawer:hover,
+.writing-drawer:focus-visible {
+  position: relative;
+  z-index: 1;
+  border-color: var(--color-stroke-muted);
+  color: var(--color-fg-default);
+  text-decoration: none;
 }
 
 .writing-list time {
+  grid-column: 1;
+  align-self: end;
   color: var(--color-fg-accent);
   font-size: var(--type-meta-size);
   font-variant-numeric: tabular-nums;
 }
 
-.writing-list h3 {
+.writing-list h2 {
+  grid-column: 1;
+  align-self: start;
   margin-bottom: 0;
-  font-size: var(--type-item-title-size);
+  font-size: var(--type-drawer-title-size);
+  font-weight: var(--ref-font-weight-medium);
+  line-height: 1.4;
+  letter-spacing: -0.025em;
 }
 
-.writing-list h3 a {
-  text-decoration-color: var(--color-stroke-accent);
+.writing-drawer__handle {
+  width: 2.75rem;
+  height: 5px;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: end;
+  border: 1px solid var(--cabinet-handle-edge);
+  background: var(--cabinet-handle);
+  box-shadow: 0 2px 0 rgb(40 38 34 / 13%);
 }
 
 .reading {
@@ -289,18 +344,47 @@ p {
   .writing-list {
     width: auto;
     margin-left: 0;
-    border: 1px solid var(--color-stroke-subtle);
-    box-shadow: var(--elevation-surface);
+    padding: var(--ref-space-x2-5);
+    border: 1px solid var(--color-stroke-muted);
+    box-shadow: 0 2px 2px rgb(40 38 34 / 4%), 0 24px 50px rgb(40 38 34 / 8%);
   }
 
-  .writing-list li {
-    grid-template-columns: 8rem minmax(0, 1fr);
+  .writing-list li + li {
+    margin-top: var(--ref-space-x1-5);
+  }
+
+  .writing-drawer {
+    min-height: 7.5rem;
+    grid-template-columns: 8.5rem minmax(0, 1fr) 5rem;
     gap: var(--ref-space-x6);
     padding: var(--spacing-list-row);
+    border: 1px solid var(--cabinet-edge);
   }
 
   .writing-list time {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
     padding-top: var(--ref-space-x0-5);
+  }
+
+  .writing-list h2 {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    max-width: 42rem;
+  }
+
+  .writing-drawer__handle {
+    width: 4.25rem;
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .writing-drawer:hover,
+  .writing-drawer:focus-visible {
+    box-shadow: -2px 3px 0 rgb(40 38 34 / 7%), -8px 12px 24px rgb(40 38 34 / 7%);
+    transform: translateX(2px);
   }
 
 }

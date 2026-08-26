@@ -1,7 +1,7 @@
 # Personal Page — Design Foundation
 
 Status: APPROVED — REVISED FOR WRITING SITE
-Updated: 2026-08-25 KST
+Updated: 2026-08-26 KST
 
 ## 1. Purpose
 
@@ -66,7 +66,7 @@ hover, active, focus는 elevation을 새로 쌓지 않고 색, underline, outlin
 모든 섹션을 카드로 만들거나 모든 표면에 그림자를 넣지 않는다.
 
 - Header: surface + 낮은 구분선, 그림자 없음
-- Home Writing Archive: 데스크톱에서 하나로 묶인 surface + stroke + 매우 낮은 elevation
+- Home Writing Archive: 데스크톱에서 하나의 cabinet frame + 분리된 drawer fronts + 낮은 elevation
 - Writing Detail: canvas 위의 좁은 reading column, 별도 card surface 없음
 
 모바일에서 묶음 surface는 화면 폭에 가깝게 펴고 그림자를 제거한다. 항목 사이의 hairline과 canvas/surface 색 차이만 유지한다.
@@ -76,11 +76,12 @@ hover, active, focus는 elevation을 새로 쌓지 않고 색, underline, outlin
 - 한글과 영문 모두 self-hosted `Wanted Sans Variable` 한 family를 사용한다. 로컬 파일과 system fallback을 함께 둔다.
 - 본문과 메타데이터는 rem 기반으로 사용자의 글자 크기 설정을 존중한다.
 - 화면 제목, 읽기 제목, 섹션 제목, 항목 제목, 본문, 메타 역할을 구분한다.
+- Home drawer 제목은 일반 item title과 분리된 `drawer-title` semantic role을 사용해 모바일 1rem, 데스크톱 1.125–1.375rem 범위를 유지한다.
 - 임의의 `650`, `750` weight는 사용하지 않고 400 / 500 / 700으로 제한한다.
 - 제목은 `text-wrap: balance`와 `word-break: keep-all`을 사용한다.
 - 페이지 gutter, intro 끝, 섹션 간격, 목록 행 padding은 semantic spacing을 사용한다.
 - art direction에만 필요한 수치는 예외로 남길 수 있다.
-- Home의 writing statement는 page title 크기, 상세 글 제목은 reading title 크기를 사용한다.
+- Home의 `생각 서랍장`은 cabinet과 균형을 이루는 전용 display 크기, 상세 글 제목은 reading title 크기를 사용한다.
 - Intro는 넉넉하게, 목록은 조밀하게, 큰 섹션 전환은 다시 넉넉하게 배치한다.
 
 ## 6. Responsive Contract
@@ -91,12 +92,13 @@ hover, active, focus는 elevation을 새로 쌓지 않고 색, underline, outlin
 ≤ 760px
 - Header는 이름 한 줄
 - Home Writing row는 날짜와 제목을 세로 배치
-- 묶음 surface는 좌우 그림자 없이 viewport 폭으로 확장
+- cabinet surface는 좌우 그림자 없이 viewport 폭으로 확장
+- 선형 handle은 날짜와 제목 오른쪽에 유지
 - Reading은 한 열로 유지
 
 > 760px
 - Header와 Footer는 content max width에 정렬
-- Home Writing row는 날짜와 제목 두 column
+- Home Writing row는 날짜, 제목, handle의 세 column
 - Reading은 좁은 max width로 중앙 정렬
 ```
 
@@ -119,10 +121,12 @@ src/styles/global.css  reset + base + shared layout/components
 - canvas는 warm neutral, 링크와 상태는 신뢰감이 느껴지는 muted ink blue를 사용한다.
 - 큰 표면의 모서리는 0–2px로 유지한다. 장식적인 둥근 카드는 쓰지 않는다.
 - 원형 장식은 사용하지 않는다.
-- 목록과 index는 항목별 카드가 아니라 하나의 종이 면과 내부 hairline으로 묶는다.
+- 일반 목록과 index는 항목별 카드가 아니라 하나의 종이 면과 내부 hairline으로 묶는다.
+- Home Writing Archive는 `생각 서랍장`이라는 이름을 반영해 예외적으로 cabinet frame과 drawer front 사이에 짧은 간격을 둔다.
 - 큰 섹션 구분선은 dark ink, 내부 구분선은 pale neutral로 위계를 나눈다.
-- 본문과 목록 링크는 underline을 유지한다.
-- hover와 focus는 120–160ms 색 변화로 제한한다.
+- 본문 링크는 underline을 유지한다. Home drawer link는 전체 앞판이 click target이므로 underline을 쓰지 않는다.
+- Home drawer 오른쪽에는 질감 없는 짧은 선형 handle을 둔다. 실제 손잡이 이미지는 사용하지 않는다.
+- 데스크톱 Home drawer의 hover와 focus는 120–160ms, 오른쪽 2px 이동과 작은 shadow로 제한한다. 모바일에서는 이동시키지 않는다.
 - grain이나 texture는 사용하지 않는다.
 
 이 방향은 Writing 중심 IA와 읽기 우선 정보 위계를 시각적으로 지원한다.

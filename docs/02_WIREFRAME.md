@@ -1,7 +1,7 @@
 # Personal Writing Site — Wireframe
 
 Status: APPROVED
-Revised and Approved: 2026-08-25
+Revised and Approved: 2026-08-26
 Supersedes: Version approved 2026-08-21
 
 ## Purpose
@@ -47,7 +47,7 @@ Header: 이병관
 ↓
 Page title: 생각 서랍장
 ↓
-Writing Archive: 날짜 + 제목
+Writing Archive: 날짜 + 제목 + 선형 손잡이
 ↓
 Footer: 저작권
 ```
@@ -56,9 +56,12 @@ Footer: 저작권
 
 - Header에는 별도 primary navigation을 두지 않는다.
 - Home은 제목 아래에 별도 subtitle이나 설명문을 두지 않는다.
+- 제목과 목록 사이에 `쓴 글` 같은 별도 section heading을 두지 않는다.
 - 경력, 현재 역할, 프로젝트, Now 상태를 Home에 넣지 않는다.
 - 공개 글은 Home에서 한 번의 추가 navigation 없이 바로 보인다.
 - Writing 항목은 날짜와 제목이 먼저 읽히게 한다.
+- Writing 목록 전체는 하나의 넓은 캐비닛, 각 행은 서랍 앞판으로 표현한다.
+- 서랍 전체가 글 상세로 이동하는 하나의 링크이며 오른쪽의 선형 손잡이는 장식 요소다.
 - 설명문, type, topic, series는 Home 목록의 필수 정보가 아니다.
 - 추천글, Featured, 카드형 분류, 빈 placeholder를 만들지 않는다.
 
@@ -104,14 +107,16 @@ Footer
 - Header는 한 줄의 사이트 이름만 유지한다.
 - Intro와 목록은 viewport 폭을 충분히 사용한다.
 - Writing row는 날짜와 제목을 세로로 쌓는다.
-- 목록 surface는 좌우 border와 shadow 없이 화면 폭에 가깝게 편다.
+- 캐비닛 surface는 좌우 border와 shadow 없이 화면 폭에 가깝게 편다.
+- 선형 손잡이는 날짜와 제목 오른쪽에 유지한다.
 - Reading은 한 열을 유지하고 본문 글자 크기와 행간을 우선한다.
 
 ### Desktop — 761px 이상
 
 - Header와 Footer는 content max width 안에 둔다.
 - Writing row는 날짜 column과 제목 column으로 나눈다.
-- Archive는 하나의 grouped paper surface와 내부 hairline으로 표현한다.
+- Archive는 하나의 캐비닛 frame과 분리된 서랍 앞판으로 표현한다.
+- hover와 keyboard focus에서 서랍은 오른쪽으로 최대 2px 이동한다.
 - Reading content는 별도의 좁은 max width로 중앙 정렬한다.
 
 검토 폭:
