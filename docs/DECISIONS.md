@@ -398,3 +398,19 @@ Home의 `생각 서랍장`이라는 이름을 시각 구조에도 반영한다.
 사이트가 포트폴리오가 아닌 개인 Writing archive라는 정체성을 더 분명하게 드러내면서도, 글보다 장식이 먼저 보이지 않게 하기 위함이다. 여러 시각안 중 기존 warm editorial foundation을 가장 많이 보존하는 넓은 서랍장 방향을 사용자가 승인했다.
 
 이 결정은 D-015의 grouped paper surface 규칙에 대한 Home Writing Archive 한정 예외이며, D-017의 공개 범위와 읽기 우선 원칙은 변경하지 않는다.
+
+---
+
+## D-020 — 2026-08-26 — Home 서랍장 디자인을 production에 배포
+
+### Decision
+
+사용자 승인에 따라 D-019의 넓은 서랍장 방향을 반영한 Home 구현을 `main`에 push하고 Cloudflare Pages project `byungklee`의 production에 배포한다.
+
+- Writing 목록 전체는 cabinet frame, 각 공개 글은 drawer front로 제공한다.
+- 현재 공개 글과 Writing Detail, RSS, 404의 범위는 변경하지 않는다.
+- canonical production URL은 `https://byungklee.pages.dev`를 유지한다.
+
+### Reason
+
+독립 prototype에서 비교한 세 방향 중 기존 warm editorial foundation과 읽기 우선 원칙을 가장 많이 보존하는 A안을 사용자가 선택하고 실제 구현 및 반응형 검증 결과를 승인했기 때문이다.
